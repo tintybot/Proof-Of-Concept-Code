@@ -1,0 +1,1105 @@
+comments,Label
+,
+"
+This may be the right answer, but users please note that this command is for Mac only, not linux.
+                
+                    – penta
+Apr 9 '17 at 16:26
+",1
+,
+"
+That's is wierd. As the URL which u have specified mentions Mac & if you try to use this url it will install. But tensorflow will actually not work.
+                
+                    – penta
+Apr 12 '17 at 14:44
+",0
+,
+"
+The windows version of the URL (for v.1.2.1) is storage.googleapis.com/tensorflow/windows/cpu/…. This only works with the AMD64 version of Python. A full list of tensorflow versions is here: storage.googleapis.com/tensorflow
+                
+                    – c2huc2hu
+Jul 11 '17 at 3:27
+
+
+
+",2
+,
+"
+>>> import platform;print(platform.architecture()) ('64bit', 'WindowsPE') but still I am seeing this exception
+                
+                    – Sujoy
+Mar 1 '17 at 16:43
+",0
+,
+"
+Suspicious of the ""top"" answer; this seems simple, intuitive, fast and safe by comparison. Tested ok with Python 3.6.4 on Windows 7.
+                
+                    – omatai
+Feb 19 '18 at 22:06
+",2
+,
+"
+To check which version of Python you are running, type python or python3 to start the interpreter, and then type import struct;print(struct.calcsize(""P"") * 8) and that will print either 32 or 64 to tell you which type you are running.
+                
+                    – Pro Q
+Jun 22 '18 at 15:37
+",1
+,
+"
+While providing a link that may answer the question is fine, but it will be better if you can also include the necessary explanation here in the answer itself. Link may not work in the near future for any number of reasons say author removes/changes the pages, etc.
+                
+                    – n4m31ess_c0d3r
+Nov 30 '17 at 21:37
+",0
+,
+"
+I did not realise I had installed Python 3.6.x 32-bit version on my 64-bit machine. Need to uninstall that and follow your instruction in this post. All works now. Thank you!
+                
+                    – yangli.liy
+Feb 4 '18 at 10:51
+",2
+,
+"
+Thanks.  To simplify this answer 2 points helped me 1.) use 64 bit version. 2.) Only python 3.5 and 3.6 are supported. Don't try use 3.7
+                
+                    – Harry
+Jan 10 '19 at 14:29
+
+
+
+",2
+,
+"
+$ pip3 --version pip 9.0.1 from c:\work\apps\python\lib\site-packages (python 3.6)  But still I see this error.
+                
+                    – Sujoy
+Mar 1 '17 at 16:36
+
+
+
+",0
+,
+"
+tensorflow does not work with python 3.6. You need version 3.5
+                
+                    – Jodo
+Mar 19 '17 at 21:13
+",1
+,
+"
+Also, I had to use python -m pip install --upgrade pip. Otherwise I would get file permission issues...
+                
+                    – Jodo
+Mar 19 '17 at 21:21
+",1
+,
+"
+how to downgrade v3.6 to v3.5.2 ?
+                
+                    – Essam Mohamed Fahmi
+Sep 13 '17 at 1:38
+",1
+,
+"
+Install 3.5.2 and update your classpath to point to 3.5.2. You can change back to 3.6 for other python stuff.
+                
+                    – Sujoy
+Sep 13 '17 at 12:59
+",1
+,
+"
+RuntimeWarning: compile time version 3.6 of module 'tensorflow.python.framework.fast_tensor_u til' does not match runtime version 3.7.... It is due to this error it is unable to fetch
+                
+                    – Sumit Kumar Saha
+Jan 26 '19 at 10:42
+
+
+
+",0
+,
+"
+will it work or will I need to setup other things also according to what tensorflow.org/versions/r0.10/get_started/os_setup.html says?
+                
+                    – user6574649
+Aug 12 '16 at 3:58
+
+
+
+",1
+,
+"
+I still get the same error on OSX, is it working for everyone else?
+                
+                    – lemonzi
+Jan 19 '17 at 16:55
+",0
+,
+"
+@lemonzi, I also had an error in OSX, just posted a solution that worked for me (solution was to make sure I had Python 3.6 installed)
+                
+                    – Julia Schwarz
+Jan 22 '17 at 18:35
+",2
+,
+"
+Fatal error in launcher: Unable to create process using '""'
+                
+                    – DJ Howarth
+Oct 10 '17 at 14:46
+",0
+,
+"
+This solution installs, but when I import tensorflow I get an error:
+                
+                    – Tensigh
+Jul 4 '17 at 1:23
+",0
+,
+"
+I've only used Keras with Tensorflow as a backend and it works fine. What error message do you get?
+                
+                    – Jonny Brooks
+Jul 5 '17 at 7:21
+",2
+,
+"
+Just tested and tensorflow imports fine for me.
+                
+                    – Jonny Brooks
+Jul 6 '17 at 16:22
+",2
+,
+"
+yes, the 64-bit version fixed it. The install from the main download page is a 32-bit. The link above provides a URL to the 64 bit version.
+                
+                    – Vladan
+Mar 20 '18 at 18:23
+",2
+,
+"
+error: Fatal error in launcher: Unable to create process using '""'
+                
+                    – DJ Howarth
+Oct 10 '17 at 14:44
+",0
+,
+"
+The question is about standard Python and just tensorflow.
+                
+                    – ivan_pozdeev
+May 10 '19 at 9:16
+",1
+,
+"
+Thank you for the reminder to try the nightly tensorflow (unstable) version. That worked for me.
+                
+                    – Matthew Redmond
+Nov 9 '19 at 18:11
+",2
+,
+"
+any reason behind down-voting?
+                
+                    – Ravinder Payal
+Apr 22 '17 at 10:56
+",1
+,
+"
+@MikeMcMahon that happened to me too. Put Python before Perl in your path, so typing pip gets you the Python package manager.
+                
+                    – Colonel Panic
+Jun 27 '13 at 22:00
+
+
+
+",1
+,
+"
+I didn't have to do any of this, I just followed the instructions on pip-installer.org/en/latest/installing.html (basically you just write ""python ez_setup.py"" and then ""python get-pip.py"")
+                
+                    – CaptainCodeman
+Nov 10 '13 at 19:50
+",2
+,
+"
+This is probably a dumb question. I entered python get-pip.py on a windows prompt but get ""python is not recognized as an internal or external command, operable program or batch file."" Am I doing something wrong? I have Python 2.7.8 installed. Do I need to change the directory? Thanks.
+                
+                    – Andrew
+Jul 14 '15 at 16:39
+",0
+,
+"
+When run the command ""python setup.py install"", if you got ""error: pip.egg-info\PKG-INFO: Permission denied"", then try to remove the read only attribute on the uncompressed pip directory.
+                
+                    – Yoo Matsuo
+May 5 '11 at 4:04
+",2
+,
+"
+If you install a 64-bit version of python, setuptools will not detect your python executable. I found some binaries here that will, though (unofficial): lfd.uci.edu/~gohlke/pythonlibs
+                
+                    – Chris
+Jun 27 '11 at 17:18
+",1
+,
+"
+Once I've installed pip using easy_install can I remove setuptools by pip uninstall setuptools? Is this okay or would it lead to issues later on?
+                
+                    – Mridang Agarwalla
+Aug 20 '11 at 7:40
+",1
+,
+"
+So the install is easyinstall, then pip,  then virtualenv, then virtualenvwrapper , then configure independents environments. with script modif in the middle for dealing with proxies... aaarrrgg
+                
+                    – nicolas
+Aug 27 '12 at 9:54
+
+
+
+",2
+,
+"
+@nicolas Yeah, easyinstall is just an outdated interface to setuptools. Pip is awesome, and virtualenv offers the kind of control that you don't get in many other languages without WAY more hackish tactics; perl being the only comparable exception. Ruby has gemsets, but in order to easily swap out Rubies, it's recommended to use either rbenv or rvm - both of which have always felt somewhat hackish to me (though they work beautifully once set up properly).
+                
+                    – AndrewPK
+Oct 16 '12 at 19:30
+",2
+,
+"
+This exact procedure is automated by pip for windows.
+                
+                    – user474491
+Dec 24 '12 at 21:40
+",2
+,
+"
+MD5 checksums of the files: get-pip.py=60a3d165e93999895e26b96681b65090  setuptools-1.3.2.tar.gz=441f2e58c0599d31597622a7b9eb605f
+                
+                    – Joris
+Nov 16 '13 at 10:49
+
+
+
+",1
+,
+"
+As of pip 1.5.1 (Jan 2014) ez_setup/setuptools/distribute isn't needed ahead of time. If needed get-pip will acquire the requirements as well as pip itself.
+                
+                    – matt wilkie
+Feb 4 '14 at 20:08
+
+
+
+",1
+,
+"
+Good overview of python packaging past and present as of Aug 2016: glyph.twistedmatrix.com/2016/08/python-packaging.html
+                
+                    – Dylan Hogg
+Aug 14 '16 at 12:54
+",2
+,
+"
+Note that it also applies to Python 2.7.9
+                
+                    – Roberto
+Dec 8 '15 at 15:25
+",2
+,
+"
+Python 2.x is legacy, Python 3.x is the present and future of the language, according to Python2orPython3
+                
+                    – matth
+Dec 9 '15 at 9:18
+
+
+
+",1
+,
+"
+Hmm I installed Python 3.4.4 and I could find pip3.exe following the path in this answer, but in cmd pip is still not recognized. Can anyone help?
+                
+                    – annena
+Jan 20 '16 at 9:30
+",0
+,
+"
+It must be noted that ActivePython also includes pip and easy_install. PyPM is a binary package manger, while pip/easy_install are, essentially, source package managers. See code.activestate.com/help/faq/…
+                
+                    – Sridhar Ratnakumar
+Feb 21 '11 at 18:08
+",2
+,
+"
+@Rafe Kettlet - When I try to install pip in Activepython it gives this error
+                
+                    – Jitendra Vyas
+Aug 6 '12 at 18:24
+",0
+,
+"
+@Jitendra - ActivePython already installs pip for you, so there is no need to install it again afterwards.
+                
+                    – mit
+May 31 '13 at 7:39
+",2
+,
+"
+And if python is already installed? This caused me nightmares. With python already installed via other means and trying cinst pip just game me errors.
+                
+                    – DevPlayer
+Apr 17 '13 at 8:20
+",0
+,
+"
+Chocolatey doesn't seem very robust especially wrt. dependencies. cinst pip at the time of writing just assumes easy_install has been installed, which is not necessarily the case.
+                
+                    – fatuhoku
+Oct 23 '13 at 10:48
+",0
+,
+"
+I've edited the question, to make it work you'll need to have easy_install before you get pip, you can just do cinst easy.install
+                
+                    – Philipp Gayret
+Jan 16 '14 at 12:23
+",2
+,
+"
+This should work, but it is worth noting that this could be extremely dangerous if one doesn't have the expertise or bother to inspect the url-file before executing such a command.
+                
+                    – Gringo Suave
+Mar 29 '13 at 21:48
+
+
+
+",2
+,
+"
+I think the simplicity is worth the risk. We are talking about a hack at python-distribute.org? There is a similar approach with sublime package control.
+                
+                    – Fernando Macedo
+Apr 1 '13 at 20:08
+",1
+,
+"
+Yes, I have checked the distribute URL and it is ok (for now at least).  The problem is in the general case where the inexperienced run remote executables on recommendation from a forum.  It should come at least with a minimal warning.
+                
+                    – Gringo Suave
+Apr 3 '13 at 7:46
+
+
+
+",2
+,
+"
+Ah, I missed that there's a launcher.c that needs manual compiling... adjusted and rebuilt distribute - that does mean that this is win32-only...
+                
+                    – David Fraser
+Jul 3 '12 at 13:49
+",1
+,
+"
+link not working. please update it
+                
+                    – swapnil gandhi
+Nov 29 '18 at 5:36
+",0
+,
+"
+I believe you'll still need distribute or setuptools.
+                
+                    – Gringo Suave
+Jan 18 '13 at 20:58
+",1
+,
+"
+On my system, I also needed to add C:\Python33\Scripts to the PATH.
+                
+                    – joshuanapoli
+Mar 6 '13 at 17:52
+",2
+,
+"
+You forgot to mention you don't have firewall issues
+                
+                    – flywire
+May 28 '18 at 7:09
+",0
+,
+"
+Curl isn't shipped with windows.
+                
+                    – Gringo Suave
+Mar 29 '13 at 21:37
+",0
+,
+"
+@GringoSuave Curl is so commonly used, everyone should have it. If that's not preferred, these two scripts can be just downloaded with any browser directly.
+                
+                    – h--n
+Mar 30 '13 at 17:24
+",0
+,
+"
+Combine this with @Fernando's answer, stackoverflow.com/a/15294806/14420, for how to do the same without curl.
+                
+                    – matt wilkie
+Apr 16 '13 at 5:04
+",1
+,
+"
+I don't see scripts folder on my machine I am using python 3.3
+                
+                    – Dejell
+Dec 15 '13 at 10:19
+",0
+,
+"
+How can they use pip if its not installed??
+                
+                    – john ktejik
+Aug 21 '19 at 23:09
+
+
+
+",1
+,
+"
+It may not be available for your OS or python version. I  updated the answer, give it a try.
+                
+                    – Pedro Lobito
+Apr 25 '19 at 12:38
+",2
+,
+"
+This is not the best practice. Use pip install Django -U or pip install Django --upgrade as described in @JoeyG 's answer.
+                
+                    – Ahmad
+Jul 26 '18 at 3:05
+",-1
+,
+"
+@Ahmad agree. There should be a smooth update process in pip and virtual env.
+                
+                    – Parth Joshi
+Jul 16 '19 at 17:45
+",-1
+,
+"
+This for me updated all my packaged and totally messed up everything!!!! Documents states: --upgrade all packages to the newest available version. Is this correct or did I do something wrong?
+                
+                    – Prometheus
+Nov 10 '14 at 12:12
+",-1
+,
+"
+@OrbiterFleet I needed to update ""requests"" so I did pip install Requests --upgrade and only ""requests"" was upgraded.  The description says ""upgrade all specified packages"" when I view the docs.
+                
+                    – harperville
+Jan 28 '15 at 14:14
+",-1
+,
+"
+ATTENTION, it also updates all dependencies and can mess up with everything. the best option is to uninstall and reinstall the package.
+                
+                    – marcelosalloum
+May 7 '15 at 13:54
+",-1
+,
+"
+How about editing the existing answer to add this bit of information instead of an (incomplete) answer?
+                
+                    – a1an
+Jun 2 '15 at 8:18
+",-1
+,
+"
+@a1an please suggest what extra info that you think should be added in a ""suggested edit"". Thanks
+                
+                    – Aaron Lelevier
+Jun 2 '15 at 14:22
+",-1
+,
+"
+I mean you could edit the answer given by JoeyG, adding the shortcut option you provided in context there.
+                
+                    – a1an
+Jun 3 '15 at 9:39
+",-1
+,
+"
+is there an option to upgrade all packages at once (ie, without listing them) with this approach?
+                
+                    – Bjorks number one fan
+May 18 '18 at 14:37
+",-1
+,
+"
+@MikePalmice yes: pip-upgrade -p all will upgrade all your packages and update requirements file without needing any input from you.
+                
+                    – Simion Agavriloaei
+May 21 '18 at 7:30
+
+
+
+",-1
+,
+"
+However an exception defined like this would not be pickable; see the discussion here stackoverflow.com/questions/16244923/…
+                
+                    – jiakai
+Aug 1 '17 at 2:54
+",-1
+,
+"
+@jiakai means ""picklable"". :-)
+                
+                    – Robino
+Sep 15 '17 at 13:39
+
+
+
+",-1
+,
+"
+Following the documentation of python for user-defined exceptions, the names that are mentioned in the __init__ function are incorrect. Instead of (self,message,error) it is (self,expression,message). The attribute expression is the input expression in which the error occurred and the message is an explanation of the error.
+                
+                    – ddleon
+Feb 27 at 15:13
+
+
+
+",-1
+,
+"
+""but this will be deprecated in the future"" - is this still intended for deprecation? Python 3.7 still seems to happily accept Exception(foo, bar, qux).
+                
+                    – mtraceur
+Apr 20 '18 at 22:36
+
+
+
+",-1
+,
+"
+It haven't seen any recent work to depricate it since the last attempt failed due to the pain of transitioning, but that usage is still discouraged. I will update my answer to reflect that.
+                
+                    – frnknstn
+May 2 '18 at 8:20
+",-1
+,
+"
+@frnknstn, why it is discouraged? Looks like a nice idiom for me.
+                
+                    – neves
+May 8 '18 at 17:48
+",-1
+,
+"
+Hello from 2018! BaseException.message is gone in Python 3, so the critique only holds for old versions, right?
+                
+                    – Kos
+Jan 3 '18 at 18:21
+",-1
+,
+"
+@Kos The critique about Liskov Substitutability is still valid. The semantics of the first argument as a ""message"" are also arguably questionable, but I don't think I'll argue the point. I'll give this more of a look when I have more free time.
+                
+                    – Aaron Hall?
+Jan 3 '18 at 19:02
+",-1
+,
+"
+FWIW, for Python 3 (at least for 3.6+), one would redefine the __str__ method of MyAppValueError instead of relying on the message attribute
+                
+                    – Jacquot
+Mar 18 '18 at 23:39
+",-1
+,
+"
+At the very least, the current docs indicate this is the way to do it (at least without the __str__) rather than other answers that use super().__init__(...).. Just a shame that overrides for __str__ and __repr__ are probably necessary just for better ""default"" serializing.
+                
+                    – kevlarr
+Mar 26 '19 at 16:46
+
+
+
+",-1
+,
+"
+Honest question: Why is it important for exceptions to be pickle-able? What are the use cases for dumping and loading exceptions?
+                
+                    – Roel Schroeven
+Aug 6 '19 at 15:21
+",-1
+,
+"
+@RoelSchroeven: I had to parallelize code once. Ran fine single process, but aspects of some of its classes were not serializable (lambda function being passed as objects). Took me some time figuring it out & fixing it. Meaning someone later may end up needing your code to be serialize, be unable to do it, and have to dig up why... My issue wasn't unpickeable errors, but I can see it causing similar problems.
+                
+                    – logicOnAbstractions
+Oct 6 '19 at 2:58
+",-1
+,
+"
+It's interesting that Django exceptions don't inherit from a common base. docs.djangoproject.com/en/2.2/_modules/django/core/exceptions Do you have a good example when catching all exceptions from a specific application is needed? (maybe it is useful only for some specific types of applications).
+                
+                    – Yaroslav Nikitenko
+Jun 10 '19 at 20:05
+",-1
+,
+"
+I found a good article on this topic, julien.danjou.info/python-exceptions-guide . I think that Exceptions should be subclassed primarily domain-based, not application-based. When your app is about HTTP protocol, you derive from HTTPError. When part of your app is TCP, you derive that part's exceptions from TCPError. But if your app spans a lot of domains (file, permissions, etc), the reason to have a MyBaseException diminishes. Or is it to protect from 'layer violation'?
+                
+                    – Yaroslav Nikitenko
+Jun 10 '19 at 20:44
+",-1
+,
+"
+This is a good example of why on SO I usually check the most upvoted answer, but the most recent ones as well. Usefull addition, thanks.
+                
+                    – logicOnAbstractions
+Oct 5 '19 at 18:09
+",-1
+,
+"
+Always call BaseException.__init__ with only one argument. Seems like unneeded constraint, since it actually accepts any number of arguments.
+                
+                    – Eugene Yarmash
+Feb 29 at 13:12
+
+
+
+",-1
+,
+"
+@EugeneYarmash I agree, now I don't understand that. I don't use it anyway. Maybe I should reread the article and expand my answer.
+                
+                    – Yaroslav Nikitenko
+Feb 29 at 13:56
+",-1
+,
+"
+Right :( The issue now lives at github.com/pypa/pip/issues/59 . But every suggestion seems to be answered with ""Yeah, but I'm too sure if X is the right way to do Y""... Now is better than never? Practicality beats purity? :(
+                
+                    – rbp
+Aug 12 '11 at 8:40
+",-1
+,
+"
+It also prints those packages that were installed with a normal package manager (like apt-get or Synaptic). If I execute this pip install -U, it will update all packages. I'm afraid it can cause some conflict with apt-get.
+                
+                    – Jabba
+Sep 13 '11 at 4:11
+",-1
+,
+"
+How about changing grep to: egrep -v '^(\-e|#)' (i get this line when running it on ubuntu 12.10: ""## FIXME: could not find svn URL in dependency_links for this package:"".
+                
+                    – LasseValentini
+Mar 5 '13 at 14:29
+",-1
+,
+"
+This works amazingly well…  It's always so satisfying when a task takes a REALLY long time…  and gives you a bunch of new stuff!  PS: Run it as root if you're on OS X!
+                
+                    – Alex Gray
+Dec 31 '11 at 4:13
+
+
+
+",-1
+,
+"
+Is there no way to install using pip without calling a subprocess?  Something like import pip pip.install('packagename')?
+                
+                    – endolith
+Mar 6 '12 at 16:18
+",-1
+,
+"
+I wrapped this up in a fabfile.py. Thanks!
+                
+                    – Josh K
+Apr 29 '13 at 21:54
+",-1
+,
+"
+@hauzer: It doesn't support Python 3. Though it might be a bug
+                
+                    – jfs
+Apr 25 '14 at 0:27
+
+
+
+",-1
+,
+"
+@mkoistinen It's a good tool but until it's merged in PIP it means installing something additional which not everyone may desire to do.
+                
+                    – Wernight
+Jul 22 '14 at 8:50
+",-1
+,
+"
+@Daniel: pip-tools no longer works, pip-review (fork of pip-tools) works.
+                
+                    – jfs
+Oct 12 '15 at 6:00
+",-1
+,
+"
+You should remove requirements.txt's =={version}. For example: python-dateutil==2.4.2 to python-dateutil for all lines.
+                
+                    – youngminz
+May 15 '16 at 5:28
+",-1
+,
+"
+I found that this didn't actually upgrade the packages on macOS.
+                
+                    – jkooker
+Mar 8 '17 at 14:42
+",-1
+,
+"
+@youngminz I would recommand a quick 'Replace all ""=="" > "">="" ' in your editor/ide before running 'pip install...' to fix this
+                
+                    – Amaury Liet
+Mar 16 '17 at 11:12
+
+
+
+",-1
+,
+"
+for /F ""delims= "" %i in ('pip list --outdated') do pip install -U %i        Quicker since it'll only try and update ""outdated"" packages
+                
+                    – Refael Ackermann
+Apr 19 '16 at 19:30
+
+
+
+",-1
+,
+"
+@RefaelAckermann I suspect this will be slower than the original :) To know which packages are outdated pip has to first check what's the latest version of each package. It does exactly the same as the first step when updating and does not proceed if there's no newer version available. However in your version pip will check versions two times, the first time to establish the list of outdated packages and the second time when updating packages on this list.
+                
+                    – Piotr Dobrogost
+Jan 17 '17 at 9:22
+",-1
+,
+"
+@RefaelAckermann Spinning up pip is order of magnitude faster than checking version of a package over network so that's number of checks which should be optimized not number of spin ups. Mine makes n checks, yours makes n+m checks.
+                
+                    – Piotr Dobrogost
+Jan 18 '17 at 14:38
+
+
+
+",-1
+,
+"
+This method has much cleaner output than @rbp's answer
+                
+                    – Gaia
+Jan 27 '19 at 16:52
+
+
+
+",-1
+,
+"
+Nice idea, but it's stuck at Checking... forever when I tried it.
+                
+                    – CGFoX
+Mar 22 '19 at 6:46
+",-1
+,
+"
+Just installed it and also stuck at checking [0;93mChecking...[0m
+                
+                    – Chris
+May 29 '19 at 17:11
+
+
+
+",-1
+,
+"
+Inside a virtualenv, I do it like this: pip freeze --local | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 'LATEST:'
+                
+                    – Jeremy Blanchard
+Mar 28 '12 at 19:46
+",-1
+,
+"
+Nowadays you can also do that with python -m pip list outdated (though it's not in requirements format).
+                
+                    – Jacktose
+Oct 28 '16 at 18:22
+
+
+
+",-1
+,
+"
+If one upgrade fails, none of the upgrades happen.
+                
+                    – Boris
+Nov 11 '18 at 14:19
+
+
+
+",-1
+,
+"
+you can avoid tail awk 'NR>2 {print $1}' cleanses the output for you
+                
+                    – SergioAraujo
+Feb 24 at 19:25
+
+
+
+",-1
+,
+"
+@SergioAraujo, this makes the solution looks also cleaner, thanks for the tip!
+                
+                    – Marc
+Feb 25 at 17:10
+",-1
+,
+"
+Had to add filters for lines beginning with 'Could' and 'Some' because apparently pip sends warnings to stdout :(
+                
+                    – Chip Camden
+Aug 13 '15 at 23:03
+",-1
+,
+"
+OK, this is fair: You can add as many | sed 's/^<First characters of the error>.*//' as needed. Thank you!
+                
+                    – raratiru
+Nov 3 '15 at 0:31
+
+
+
+",-1
+,
+"
+Or: pip list --outdated | cut -d ' ' -f 1 | xargs -n 1 pip install --upgrade
+                
+                    – Jens
+Dec 9 '15 at 21:15
+",-1
+,
+"
+another way to overcome the jurassic BSD sed of OS X is to use gsed (GNU sed) instead. To get it, brew install gnu-sed
+                
+                    – Walter Tross
+Jan 9 '19 at 7:33
+
+
+
+",-1
+,
+"
+@WalterTross ... Jurassic ... good adjective use. So we now have two ways to group update pip packages with a nice audit trail on the terminal. (1) Use the -E option as in the answer and (2) install gsed to leave the Jurassic period.
+                
+                    – Douglas Daseeco
+Jan 9 '19 at 8:13
+",-1
+,
+"
+I received this warning DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
+                
+                    – Reman
+Nov 26 '16 at 14:01
+",-1
+,
+"
+@Reman: that is because you are using Pip v9.0.1. This is just a deprecation message meaning that some functionalities will not survive in a future Pip release. Nothing to be concerned about ;)
+                
+                    – AlessioX
+Dec 17 '16 at 20:11
+",-1
+,
+"
+However, this has to be marked as the final solution. Indeed the accepted answer will run all over your pip packages, which is a waste of time if you have to update only 1 or 2 packages. This solution, as instead, will run just all over the outdated packages
+                
+                    – AlessioX
+Dec 17 '16 at 20:12
+",-1
+,
+"
+This is what pip should do by default.
+                
+                    – Nostalg.io
+Jun 8 '17 at 15:51
+",-1
+,
+"
+heads up with your tool some character escapes don't seem to work correctly on my windows machine but other than that it's fine
+                
+                    – Luke
+Jul 12 '17 at 12:43
+
+
+
+",-1
+,
+"
+haven't really tested it on windows, but i'll install a virtual machine. Thanks
+                
+                    – Simion Agavriloaei
+Jul 12 '17 at 14:01
+",-1
+,
+"
+Last commit 7 years ago
+                
+                    – Boris
+Jul 29 '19 at 6:33
+",-1
+,
+"
+in year 2013 AD
+                
+                    – dotbit
+Dec 10 '19 at 19:09
+",-1
+,
+"
+subprocess.call(""sudo pip install... in case you need permissions
+                
+                    – Maximiliano Rios
+May 27 '14 at 19:50
+
+
+
+",-1
+,
+"
+@MaximilianoRios Please do not sudo pip install, use a virtual env, instead.
+                
+                    – Bengt
+Feb 20 '16 at 15:28
+
+
+
+",-1
+,
+"
+pip list --outdated | %{$_.split('==')[0]} | %{pip install --upgrade $_}?
+                
+                    – Foad
+May 22 '19 at 8:38
+",-1
+,
+"
+Perhaps pip list --outdated --format freeze | %{$_.split('==')[0]} | %{pip install --upgrade $_} would be more appropriate.
+                
+                    – brainplot
+Jan 3 at 5:06
+",-1
+,
+"
+pip freeze | awk -F'[=]' '{print $1}' | xargs pip install -U
+                
+                    – JohnDHH
+Mar 13 '18 at 3:16
+
+
+
+",-1
+,
+"
+And for python 3...  pip3 install -U $(pip3 freeze | awk -F'[=]' '{print $1}')
+                
+                    – Jimmy M.G. Lim
+Apr 3 '19 at 7:48
+",-1
+,
+"
+Whereas other solutions stalled upon encountering the slightest anomaly, this solution warned and then skipped the problem to continue with the other packages. Great!
+                
+                    – Serge Stroobandt
+May 10 '18 at 20:14
+",-1
+,
+"
+this is the cleanest, highest readable way to update pip packages in the most amount of brevity. great.
+                
+                    – Mark Shust
+Oct 28 '13 at 12:41
+
+
+
+",-1
+,
+"
+Your answer has been changed from yolk to yolk3k, your original answer definitely had issues with python3.
+                
+                    – AXO
+Dec 19 '16 at 19:41
+
+
+
+",-1
+,
+"
+On Ubuntu (and other Debian derivatives), pip apparently puts packages in /usr/local/lib/python2.7/dist-packages or similar. You could use '/usr/local/lib/' instead of 'site-packages' in the if statement in this case.
+                
+                    – drevicko
+Jan 13 '13 at 4:31
+
+
+
+",-1
+,
+"
+Version with error handling (as per comment): gist.github.com/SamuelMarks/7885f2e8e5f0562b1063
+                
+                    – Samuel Marks
+Apr 27 '15 at 5:39
+",-1
+,
+"
+Step 1: pip install pip-upgrade-outdated  Step 2: pip-upgrade-outdated  ...done
+                
+                    – shao.lo
+Oct 23 '18 at 22:55
+",-1
+,
+"
+@Enkouyami on windows 7 this command does not work without the -r. -r must preclude the path to the requirements file.
+                
+                    – Chockomonkey
+Jul 16 '18 at 21:45
+",-1
+,
+"
+Here's my output: kerberos iwlib PyYAML Could pygpgme Could Could Could ... Note all the ""Could""s. Those stem from output of pip list -o of ""Could not find any downloads that satisfy the requirement <package>""
+                
+                    – DrStrangepork
+Nov 14 '14 at 21:03
+",-1
+,
+"
+Can you paste the output of pip list -o ?
+                
+                    – Alex V
+Nov 15 '14 at 9:30
+",-1
+,
+"
+Comments don't format this well, but here's a snippet (line endings are marked with ';'): # pip list -o; urwid (Current: 1.1.1 Latest: 1.3.0); Could not find any downloads that satisfy the requirement python-default-encoding; pycups (Current: 1.9.63 Latest: 1.9.68); Could not find any downloads that satisfy the requirement policycoreutils-default-encoding; Could not find any downloads that satisfy the requirement sepolicy; 
+                
+                    – DrStrangepork
+Nov 17 '14 at 22:30
+
+
+
+",-1

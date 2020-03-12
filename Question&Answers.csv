@@ -1,0 +1,2322 @@
+,Answer,Comment 1,Comment 2,Comment 3,Link,Question,Time,UpVotes
+0,"
+I found this to finally work.
+python3 -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.12.0-py3-none-any.whl
+
+Edit 1: This was tested on Windows (8, 8.1, 10), Mac and Linux. Change python3 to python according to your configuration. Change py3 to py2 in the url if you are using Python 2.x.
+Edit 2: A list of different versions if someone needs: https://storage.googleapis.com/tensorflow
+Edit 3: A list of urls for the available wheel packages is available here:
+https://www.tensorflow.org/install/pip#package-location
+","
+This may be the right answer, but users please note that this command is for Mac only, not linux.
+                
+                    – penta
+Apr 9 '17 at 16:26
+","
+That's is wierd. As the URL which u have specified mentions Mac & if you try to use this url it will install. But tensorflow will actually not work.
+                
+                    – penta
+Apr 12 '17 at 14:44
+","
+The windows version of the URL (for v.1.2.1) is storage.googleapis.com/tensorflow/windows/cpu/…. This only works with the AMD64 version of Python. A full list of tensorflow versions is here: storage.googleapis.com/tensorflow
+                
+                    – c2huc2hu
+Jul 11 '17 at 3:27
+
+
+
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Feb 6 at,687
+1,"
+You need a 64-bit version of Python and in your case are using a 32-bit version. As of now Tensorflow only supports 64-bit versions of Python 3.5.x and 3.6.x on Windows. See the install docs to see what is currently supported
+To check which version of Python you are running, type python or python3 to start the interpreter, and then type import struct;print(struct.calcsize(""P"") * 8) and that will print either 32 or 64 to tell you which bit version of Python you are running.
+From comments:
+To download a different version of Python for Windows, go to python.org/downloads/windows and scroll down until you see the version you want that ends in a ""64"". That will be the 64 bit version that should work with tensorflow
+","
+>>> import platform;print(platform.architecture()) ('64bit', 'WindowsPE') but still I am seeing this exception
+                
+                    – Sujoy
+Mar 1 '17 at 16:43
+","
+Suspicious of the ""top"" answer; this seems simple, intuitive, fast and safe by comparison. Tested ok with Python 3.6.4 on Windows 7.
+                
+                    – omatai
+Feb 19 '18 at 22:06
+","
+To check which version of Python you are running, type python or python3 to start the interpreter, and then type import struct;print(struct.calcsize(""P"") * 8) and that will print either 32 or 64 to tell you which type you are running.
+                
+                    – Pro Q
+Jun 22 '18 at 15:37
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Mar 6 at,258
+2,"
+You need to use right version of Python and pip
+On Windows 10, with Python 3.6.X version I was facing same then after checking deliberately , I noticed I had Python-32 bit installation on my 64 bit machine. Remember TensorFlow is only compatible with 64bit installation of python. Not 32 bit of Python
+
+If we download Python from python.org , the default installation would be 32 bit. So we have to download 64 bit installer manually to install Python 64 bit. And then add below to PATH environment.
+C:\Users\AppData\Local\Programs\Python\Python36
+C:\Users\AppData\Local\Programs\Python\Python36\Scripts
+
+Then run gpupdate /Force on command prompt. If python command doesnt work for 64 bit restart your machine.
+Then run python on command prompt. It should show 64 bit
+C:\Users\YOURNAME>python
+Python 3.6.3 (v3.6.3:2c5fed8, Oct  3 2017, 18:11:49) [MSC v.1900 64 bit (AMD64)] on win32
+Type ""help"", ""copyright"", ""credits"" or ""license"" for more information.
+
+Then run below command to install tensorflow CPU version(recommended)
+pip3 install --upgrade tensorflow
+
+
+Update - Python 3.7
+Currently only Python 3.5 and Python 3.6 are supported officially. Tensorflow has not released binaries for Python 3.7 still officially, we might need to wait a little for it to be released. You can use Python 3.6.x alongside or Anaconda with Python<3.7 virtual environment for time being.
+","
+While providing a link that may answer the question is fine, but it will be better if you can also include the necessary explanation here in the answer itself. Link may not work in the near future for any number of reasons say author removes/changes the pages, etc.
+                
+                    – n4m31ess_c0d3r
+Nov 30 '17 at 21:37
+","
+I did not realise I had installed Python 3.6.x 32-bit version on my 64-bit machine. Need to uninstall that and follow your instruction in this post. All works now. Thank you!
+                
+                    – yangli.liy
+Feb 4 '18 at 10:51
+","
+Thanks.  To simplify this answer 2 points helped me 1.) use 64 bit version. 2.) Only python 3.5 and 3.6 are supported. Don't try use 3.7
+                
+                    – Harry
+Jan 10 '19 at 14:29
+
+
+
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jan 12 '19,70
+3,"
+If you are trying to install it on a windows machine you need to have a 64-bit version of python 3.5. This is the only way to actually install it. From the website:
+
+TensorFlow supports only 64-bit Python 3.5 on Windows. We have tested the pip packages with the following distributions of Python:
+Python 3.5 from Anaconda
+Python 3.5 from python.org.
+
+You can download the proper version of python from here (make sure you grab one of the ones that says ""Windows x86-64"")
+You should now be able to install with pip install tensorflow or python -m pip install tensorflow (make sure that you are using the right pip, from python3, if you have both python2 and python3 installed)
+Remember to install Anaconda 3-5.2.0 as the latest version which is 3-5.3.0 have python version 3.7 which is not supported by Tensorflow.
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Dec 22 '18,41
+4,"
+From tensorflow website: ""You will need pip version 8.1 or later for the following commands to work"". Run this command to upgrade your pip, then try install tensorflow again:
+pip install --upgrade pip
+
+","
+$ pip3 --version pip 9.0.1 from c:\work\apps\python\lib\site-packages (python 3.6)  But still I see this error.
+                
+                    – Sujoy
+Mar 1 '17 at 16:36
+
+
+
+","
+tensorflow does not work with python 3.6. You need version 3.5
+                
+                    – Jodo
+Mar 19 '17 at 21:13
+","
+Also, I had to use python -m pip install --upgrade pip. Otherwise I would get file permission issues...
+                
+                    – Jodo
+Mar 19 '17 at 21:21
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Dec 30 '16,40
+5,"
+I figured out that TensorFlow 1.12.0 only works with Python version 3.5.2. I had Python 3.7 but that didn't work. So, I had to downgrade Python and then I could install TensorFlow to make it work.
+To downgrade your python version from 3.7 to 3.6
+conda install python=3.6.8
+
+","
+how to downgrade v3.6 to v3.5.2 ?
+                
+                    – Essam Mohamed Fahmi
+Sep 13 '17 at 1:38
+","
+Install 3.5.2 and update your classpath to point to 3.5.2. You can change back to 3.6 for other python stuff.
+                
+                    – Sujoy
+Sep 13 '17 at 12:59
+","
+RuntimeWarning: compile time version 3.6 of module 'tensorflow.python.framework.fast_tensor_u til' does not match runtime version 3.7.... It is due to this error it is unable to fetch
+                
+                    – Sumit Kumar Saha
+Jan 26 '19 at 10:42
+
+
+
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,May 25 '19,39
+6,"
+Updated 11/28/2016: TensorFlow is now available in PyPI, starting with release 0.12. You can type
+pip install tensorflow
+
+...or...
+pip install tensorflow-gpu
+
+...to install the CPU-only or GPU-accelerated version of TensorFlow respectively.
+
+Previous answer: TensorFlow is not yet in the PyPI repository, so you have to specify the URL to the appropriate ""wheel file"" for your operating system and Python version.
+The full list of supported configurations is listed on the TensorFlow website, but for example, to install version 0.10 for Python 2.7 on Linux, using CPU only, you would type the following command:
+$ pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.10.0rc0-cp27-none-linux_x86_64.whl
+
+","
+will it work or will I need to setup other things also according to what tensorflow.org/versions/r0.10/get_started/os_setup.html says?
+                
+                    – user6574649
+Aug 12 '16 at 3:58
+
+
+
+","
+I still get the same error on OSX, is it working for everyone else?
+                
+                    – lemonzi
+Jan 19 '17 at 16:55
+","
+@lemonzi, I also had an error in OSX, just posted a solution that worked for me (solution was to make sure I had Python 3.6 installed)
+                
+                    – Julia Schwarz
+Jan 22 '17 at 18:35
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Nov 29 '16,19
+7,"
+Install Python 3.5.x 64 bit amd version here. Make sure you add Python to your PATH variable. Then open a command prompt and type 
+python -m pip install --upgrade pip
+
+should give you the following result :
+ Collecting pip
+ Using cached pip-9.0.1-py2.py3-none-any.whl
+ Installing collected packages: pip
+ Found existing installation: pip 7.1.2
+ Uninstalling pip-7.1.2:
+ Successfully uninstalled pip-7.1.2
+ Successfully installed pip-9.0.1
+
+Now type 
+ pip3 install --upgrade tensorflow
+
+","
+Fatal error in launcher: Unable to create process using '""'
+                
+                    – DJ Howarth
+Oct 10 '17 at 14:46
+",null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Mar 4 '19,12
+8,"
+I had the same problem and solved with this:
+# Ubuntu/Linux 64-bit, CPU only, Python 2.7
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp27-none-linux_x86_64.whl
+
+# Ubuntu/Linux 64-bit, GPU enabled, Python 2.7
+# Requires CUDA toolkit 8.0 and CuDNN v5. For other versions, see ""Installing from sources"" below.
+
+# Mac OS X, CPU only, Python 2.7:
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.1-py2-none-any.whl
+
+# Mac OS X, GPU enabled, Python 2.7:
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/gpu/tensorflow_gpu-0.12.1-py2-none-any.whl
+
+# Ubuntu/Linux 64-bit, CPU only, Python 3.4
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp34-cp34m-linux_x86_64.whl
+
+# Ubuntu/Linux 64-bit, GPU enabled, Python 3.4
+# Requires CUDA toolkit 8.0 and CuDNN v5. For other versions, see ""Installing from sources"" below.
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.1-cp34-cp34m-linux_x86_64.whl
+
+# Ubuntu/Linux 64-bit, CPU only, Python 3.5
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp35-cp35m-linux_x86_64.whl
+
+# Requires CUDA toolkit 8.0 and CuDNN v5. For other versions, see ""Installing from sources"" below.
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.1-cp35-cp35m-linux_x86_64.whl
+
+# Mac OS X, CPU only, Python 3.4 or 3.5:
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.1-py3-none-any.whl
+
+# Mac OS X, GPU enabled, Python 3.4 or 3.5:
+(tensorflow)$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/gpu/tensorflow_gpu-0.12.1-py3-none-any.whl
+
+Plus:
+# Python 2
+(tensorflow)$ pip install --upgrade $TF_BINARY_URL
+
+# Python 3
+(tensorflow)$ pip3 install --upgrade $TF_BINARY_URL
+
+Found on Docs.
+UPDATE!
+There are new links for new versions
+For example, for installing tensorflow v1.0.0 in OSX you need to use:
+https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py2-none-any.whl
+
+instead of
+https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.1-py2-none-any.whl
+
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Apr 3 '17,11
+9,"
+I had the same error when trying to install on my Mac (using Python 2.7). A similar solution to the one I'm giving here also seemed to work for Python 3 on Windows 8.1 according to a different answer on this page by Yash Kumar Verma
+Solution 
+Step 1: go to The URL of the TensorFlow Python package section of the TensorFlow installation page and copy the URL of the relevant link for your Python installation.
+Step 2: open a terminal/command prompt and run the following command:
+pip install --upgrade [paste copied url link here] 
+So for me it was the following:
+pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.2.0-py2-none-any.whl
+Update (July 21 2017): I tried this with some others who were running on Windows machines with Python 3.6 and they had to change the line in Step 2 to:
+python -m pip install [paste copied url link here]
+Update (26 July 2018): For Python 3.6.2 (not 3.7 because it's in 3.6.2 in TF Documentation), you can also use pip3 install --upgrade [paste copied URL here] in Step 2.
+","
+This solution installs, but when I import tensorflow I get an error:
+                
+                    – Tensigh
+Jul 4 '17 at 1:23
+","
+I've only used Keras with Tensorflow as a backend and it works fine. What error message do you get?
+                
+                    – Jonny Brooks
+Jul 5 '17 at 7:21
+","
+Just tested and tensorflow imports fine for me.
+                
+                    – Jonny Brooks
+Jul 6 '17 at 16:22
+",https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jul 26 '18,11
+10,"
+Try this, it should work:
+ python.exe -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl
+
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jan 7 '18,8
+11,"
+Try this:
+export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.1-py3-none-any.whl
+pip3 install --upgrade $TF_BINARY_URL
+
+Source: https://www.tensorflow.org/get_started/os_setup (page no longer exists)
+Update 2/23/17
+Documentation moved to: https://www.tensorflow.org/install
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Feb 23 '17,7
+12,"
+
+Install python by checking Add Python to Path
+pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl
+
+This works for windows 10.0
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Apr 9 '17,7
+13,"
+If you run into this issue recently (say, after Python 3.7 release in 2018), most likely this is caused by the lack of Python 3.7 support (yet) from the tensorflow side. Try using Python 3.6 instead if you don't mind. There are some tricks you can find from https://github.com/tensorflow/tensorflow/issues/20444, but use them at your own risk. I used the one harpone suggested - first downloaded the tensorflow wheel for Python 3.6 and then renamed it manually...
+cp tensorflow-1.11.0-cp36-cp36m-linux_x86_64.whl tensorflow-1.11.0-cp37-cp37m-linux_x86_64.whl
+pip install tensorflow-1.11.0-cp37-cp37m-linux_x86_64.whl
+
+The good news is that there is a pull request for 3.7 support already. Hope it will be released soon.
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Nov 5 '18,7
+14,"
+I had the same problem. After uninstalling the 32-bit version of python and reinstalling the 64-bit version I tried reinstalling TensorFlow and it worked.
+Link to TensorFlow guide: https://www.tensorflow.org/install/install_windows
+","
+yes, the 64-bit version fixed it. The install from the main download page is a 32-bit. The link above provides a URL to the 64 bit version.
+                
+                    – Vladan
+Mar 20 '18 at 18:23
+",null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Apr 21 '17,6
+15,"
+If you're trying to install tensorflow in anaconda and it isn't working, then you may need to downgrade python version because only 3.6.x is currently supported while anaconda has the latest version.
+
+check python version: python --version
+if version > 3.6.x then follow step 3, otherwise stop, the problem may be somewhere else
+conda search python
+conda install python=3.6.6
+Check version again: python --version
+If version is correct, install tensorflow (step 7)
+pip install tensorflow
+
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Sep 30 '18,6
+16,"
+If you are using the Anaconda Python installation, pip install tensorflow will give the error stated above, shown below:
+Collecting tensorflow
+Could not find a version that satisfies the requirement tensorflow (from versions: )
+No matching distribution found for tensorflow
+
+According to the TensorFlow installation page, you will need to use the --ignore-installed flag when running pip install. 
+However, before this can be done see this link
+to ensure the TF_BINARY_URL variable is set correctly in relation to the desired version of TensorFlow that you wish to install.
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jan 19 '17,4
+17,"
+Unfortunately my reputation is to low to command underneath @Sujoy answer.
+In their docs they claim to support python 3.6.
+The link provided by @mayur shows that their is indeed only a python3.5 wheel package. This is my try to install tensorflow:
+Microsoft Windows [Version 10.0.16299.371]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\>python3 -m pip install --upgrade pip
+Requirement already up-to-date: pip in d:\python\v3\lib\site-packages (10.0.0)
+
+C:\>python3 -m pip -V
+pip 10.0.0 from D:\Python\V3\lib\site-packages\pip (python 3.6)
+
+C:\>python3 -m pip install --upgrade tensorflow
+Collecting tensorflow
+Could not find a version that satisfies the requirement tensorflow (from versions: )
+No matching distribution found for tensorflow
+
+while python 3.5 seems to install successfully. I would love to see a python3.6 version since they claim it should also work on python3.6.
+Quoted :
+""TensorFlow supports Python 3.5.x and 3.6.x on Windows. Note that Python 3 comes with the pip3 package manager, which is the program you'll use to install TensorFlow.""
+Source : https://www.tensorflow.org/install/install_windows
+Python3.5 install :
+Microsoft Windows [Version 10.0.16299.371]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\>python3 -m pip install --upgrade pip
+Requirement already up-to-date: pip in d:\python\v3\lib\site-packages (10.0.0)
+
+C:\>python3 -m pip -V
+pip 10.0.0 from D:\Python\V3_5\lib\site-packages\pip (python 3.5.2)
+
+C:\>python3 -m pip install --upgrade tensorflow
+Collecting tensorflow
+  Downloading 
+    ....
+    ....
+
+I hope i am terrible wrong here but if not ring a alarm bell 😛 
+Edit:
+A couple of posts below someone pointed out that the following command would work and it did.
+python3 -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl
+
+Strange pip is not working 🤔
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Apr 18 '18,4
+18,"
+This worked for me with Python 2.7 on Mac OS X Yosemite 10.10.5:
+sudo pip install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.5.0-py2-none-any.whl
+
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Mar 11 '17,3
+19,"
+There are multiple groups of answers to this question. This answer aims to generalize one group of answers:
+There may not be a version of TensorFlow that is compatible with your version of Python. This is particularly true if you're using a new release of Python. For example, there may be a delay between the release of a new version of Python and the release of TensorFlow for that version of Python.
+In this case, I believe your options are to:
+1) Downgrade to the previous version of Python.
+2) Compile TensorFlow from the source code.
+3) Wait for a matching version of TensorFlow.
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Oct 25 '19,3
+20,"
+For windows this worked for me,
+Download the wheel from this link. Then from command line navigate to your download folder where the wheel is present and simply type in the following command - 
+pip install tensorflow-1.0.0-cp36-cp36m-win_amd64.whl
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Feb 26 '17,2
+21,"
+I was facing the same issue. I tried the following and it worked.
+installing for Mac OS X, anaconda python 2.7
+pip uninstall tensorflow
+export TF_BINARY_URL=<get the correct url from http://tflearn.org/installation/>
+pip install --upgrade $TF_BINARY_URL
+
+Installed tensorflow-1.0.0
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Mar 23 '17,2
+22,"
+
+Start Command Prompt with Administrative Permission
+Enter following command     python -m pip install --upgrade pip
+Next Enter command pip install tensorflow
+
+","
+error: Fatal error in launcher: Unable to create process using '""'
+                
+                    – DJ Howarth
+Oct 10 '17 at 14:44
+",null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jun 4 '17,2
+23,"
+The URL to install TensorFlow in Windows, below is the URL. It worked fine for me.
+python -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl
+
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Aug 16 '17,2
+24,"
+For pyCharm users:
+
+Check pip version:
+pip3 -V
+If pip is older than 9.0.1:
+py -3 -m pip install --upgrade pip
+Then:
+**py -3 -m pip install --upgrade
+
+https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl**
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Mar 13 '18,2
+25,"
+Following steps allows you to install tensorflow and keras
+
+downloading Anaconda3-5.2.0 which comes with python 3.6 from https://repo.anaconda.com/archive/
+Install Anaconda and open Anaconda Prompt and execute below commands 
+
+conda install jupyter 
+conda install scipy
+pip install sklearn
+pip install msgpack
+pip install pandas
+pip install pandas-datareader
+pip install matplotlib 
+pip install pillow
+pip install requests
+pip install h5py
+pip install tensorflow
+pip install keras
+
+
+","
+The question is about standard Python and just tensorflow.
+                
+                    – ivan_pozdeev
+May 10 '19 at 9:16
+",null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Dec 23 '18,2
+26,"
+update 2019:
+for install the preview version of TensorFlow 2 in Google Colab you can use: 
+!wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1604-10-0-local-10.0.130-410.48_1.0-1_amd64 -O cuda-repo-ubuntu1604-10-0-local-10.0.130-410.48_1.0-1_amd64.deb
+!dpkg -i cuda-repo-ubuntu1604-10-0-local-10.0.130-410.48_1.0-1_amd64.deb
+!apt-key add /var/cuda-repo-10-0-local-10.0.130-410.48/7fa2af80.pub
+!apt-get update
+!apt-get install cuda
+!pip install tf-nightly-gpu-2.0-preview
+and for install the TensorFlow 2 bye pip you can use :
+ pip install tf-nightly-gpu-2.0-preview for GPU and
+ pip install tf-nightly-2.0-preview 
+for CPU. 
+","
+Thank you for the reminder to try the nightly tensorflow (unstable) version. That worked for me.
+                
+                    – Matthew Redmond
+Nov 9 '19 at 18:11
+",null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jan 17 '19,2
+27,"
+I had this problem on OSX Sierra 10.12.2. It turns out I had the wrong version of Python installed (I had Python 3.4 but tensorflow pypi packages for OSX are only for python 3.5 and up). 
+The solution was to install Python 3.6. Here's what I did to get it working. Note: I used Homebrew to install Python 3.6, you could do the same by using the Python 3.6 installer on python.org
+brew uninstall python3
+brew install python3
+python3 --version # Verify that you see ""Python 3.6.0""
+pip install tensorflow # With python 3.6 the install succeeds
+pip install jupyter # ""ipython notebook"" didn't work for me until I installed jupyter
+ipython notebook # Finally works!
+
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Jan 22 '17,1
+28,"
+Excerpt from tensorflow website
+https://www.tensorflow.org/install/install_windows
+
+Installing with native pip
+If the following version of Python is not installed on your machine, install it now:
+Python 3.5.x from python.org
+  TensorFlow only supports version 3.5.x of Python on Windows. Note that Python 3.5.x comes with the pip3 package manager, which is the program you'll use to install TensorFlow.
+To install TensorFlow, start a terminal. Then issue the appropriate pip3 install command in that terminal. To install the CPU-only version of TensorFlow, enter the following command:
+
+C:\> pip3 install --upgrade tensorflow
+To install the GPU version of TensorFlow, enter the following command:
+
+C:\> pip3 install --upgrade tensorflow-gpu
+
+","
+any reason behind down-voting?
+                
+                    – Ravinder Payal
+Apr 22 '17 at 10:56
+",null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Mar 12 '17,1
+29,"
+If your command pip install --upgrade tensorflowcompiles, then your version of tensorflow should be the newest. I personally prefer to use anaconda. You can easily install and upgrade tensorflow as follows:
+ conda install -c conda-forge tensorflow  # to install
+ conda upgrade -c conda-forge tensorflow  # to upgrade
+
+Also if you want to use it with your GPU you have an easy install:
+ conda install -c anaconda tensorflow-gpu
+
+I've been using it for a while now and I have never had any problem.
+",null,null,null,https://stackoverflow.com/questions/38896424/tensorflow-not-found-using-pip&sa=U&ved=2ahUKEwjx04HK0o_oAhUkCqYKHZ2qDBkQFjAAegQIARAB&usg=AOvVaw0HcJUES-BxqpuSwSAOLCz,TensorFlow not found using pip,Feb 22 '18,1
+30,"
+Python 2.7.9+ and 3.4+
+Good news! Python 3.4 (released March 2014) and Python 2.7.9 (released December 2014) ship with Pip. This is the best feature of any Python release. It makes the community's wealth of libraries accessible to everyone. Newbies are no longer excluded from using community libraries by the prohibitive difficulty of setup. In shipping with a package manager, Python joins Ruby, Node.js, Haskell, Perl, Go—almost every other contemporary language with a majority open-source community. Thank you, Python.
+If you do find that pip is not available when using Python 3.4+ or Python 2.7.9+, simply execute e.g.:
+py -3 -m ensurepip
+
+Of course, that doesn't mean Python packaging is problem solved. The experience remains frustrating. I discuss this in the Stack Overflow question Does Python have a package/module management system?.
+And, alas for everyone using Python 2.7.8 or earlier (a sizable portion of the community). There's no plan to ship Pip to you. Manual instructions follow.
+Python 2 ≤ 2.7.8 and Python 3 ≤ 3.3
+Flying in the face of its 'batteries included' motto, Python ships without a package manager. To make matters worse, Pip was—until recently—ironically difficult to install.
+Official instructions
+Per https://pip.pypa.io/en/stable/installing/#do-i-need-to-install-pip:
+Download get-pip.py, being careful to save it as a .py file rather than .txt. Then, run it from the command prompt:
+python get-pip.py
+
+You possibly need an administrator command prompt to do this. Follow Start a Command Prompt as an Administrator (Microsoft TechNet).
+This installs the pip package, which (in Windows) contains ...\Scripts\pip.exe that path must be in PATH environment variable to use pip from the command line (see the second part of 'Alternative Instructions' for adding it to your PATH,
+Alternative instructions
+The official documentation tells users to install Pip and each of its dependencies from source. That's tedious for the experienced and prohibitively difficult for newbies.
+For our sake, Christoph Gohlke prepares Windows installers (.msi) for popular Python packages. He builds installers for all Python versions, both 32 and 64 bit. You need to:
+
+Install setuptools
+Install pip
+
+For me, this installed Pip at C:\Python27\Scripts\pip.exe. Find pip.exe on your computer, then add its folder (for example, C:\Python27\Scripts) to your path (Start / Edit environment variables). Now you should be able to run pip from the command line. Try installing a package:
+pip install httpie
+
+There you go (hopefully)! Solutions for common problems are given below:
+Proxy problems
+If you work in an office, you might be behind an HTTP proxy. If so, set the environment variables http_proxy and https_proxy. Most Python applications (and other free software) respect these. Example syntax:
+http://proxy_url:port
+http://username:password@proxy_url:port
+
+If you're really unlucky, your proxy might be a Microsoft NTLM proxy. Free software can't cope. The only solution is to install a free software friendly proxy that forwards to the nasty proxy. http://cntlm.sourceforge.net/
+Unable to find vcvarsall.bat
+Python modules can be partly written in C or C++. Pip tries to compile from source. If you don't have a C/C++ compiler installed and configured, you'll see this cryptic error message.
+
+Error: Unable to find vcvarsall.bat
+
+You can fix that by installing a C++ compiler such as MinGW or Visual C++. Microsoft actually ships one specifically for use with Python. Or try Microsoft Visual C++ Compiler for Python 2.7.
+Often though it's easier to check Christoph's site for your package.
+","
+@MikeMcMahon that happened to me too. Put Python before Perl in your path, so typing pip gets you the Python package manager.
+                
+                    – Colonel Panic
+Jun 27 '13 at 22:00
+
+
+
+","
+I didn't have to do any of this, I just followed the instructions on pip-installer.org/en/latest/installing.html (basically you just write ""python ez_setup.py"" and then ""python get-pip.py"")
+                
+                    – CaptainCodeman
+Nov 10 '13 at 19:50
+","
+This is probably a dumb question. I entered python get-pip.py on a windows prompt but get ""python is not recognized as an internal or external command, operable program or batch file."" Am I doing something wrong? I have Python 2.7.8 installed. Do I need to change the directory? Thanks.
+                
+                    – Andrew
+Jul 14 '15 at 16:39
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Oct 3 '19,1811
+31,"
+-- Outdated -- use distribute, not setuptools as described here. --
+-- Outdated #2 -- use setuptools as distribute is deprecated.
+As you mentioned pip doesn't include an independent installer, but you can install it with its predecessor easy_install.
+So:
+
+Download the last pip version from here: http://pypi.python.org/pypi/pip#downloads
+Uncompress it
+Download the last easy installer for Windows: (download the .exe at the bottom of http://pypi.python.org/pypi/setuptools ). Install it.
+copy the uncompressed pip folder content into C:\Python2x\ folder (don't copy the whole folder into it, just the content), because python command doesn't work outside C:\Python2x folder and then run:  python setup.py install
+Add your python C:\Python2x\Scripts to the path
+
+You are done. 
+Now you can use pip install package to easily install packages as in Linux :)
+","
+When run the command ""python setup.py install"", if you got ""error: pip.egg-info\PKG-INFO: Permission denied"", then try to remove the read only attribute on the uncompressed pip directory.
+                
+                    – Yoo Matsuo
+May 5 '11 at 4:04
+","
+If you install a 64-bit version of python, setuptools will not detect your python executable. I found some binaries here that will, though (unofficial): lfd.uci.edu/~gohlke/pythonlibs
+                
+                    – Chris
+Jun 27 '11 at 17:18
+","
+Once I've installed pip using easy_install can I remove setuptools by pip uninstall setuptools? Is this okay or would it lead to issues later on?
+                
+                    – Mridang Agarwalla
+Aug 20 '11 at 7:40
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 4 '14,300
+32,"
+2014 UPDATE:
+1) If you have installed Python 3.4 or later, pip is included with Python and should already be working on your system.
+2) If you are running a version below Python 3.4 or if pip was not installed with Python 3.4 for some reason, then you'd probably use pip's official installation script get-pip.py. The pip installer now grabs setuptools for you, and works regardless of architecture (32-bit or 64-bit).
+The installation instructions are detailed here and involve:
+
+To install or upgrade pip, securely download get-pip.py.
+Then run the following (which may require administrator access):
+
+python get-pip.py
+
+
+To upgrade an existing setuptools (or distribute), run pip install -U setuptools
+
+I'll leave the two sets of old instructions below for posterity.
+OLD Answers:
+For Windows editions of the 64 bit variety - 64-bit Windows + Python used to require a separate installation method due to ez_setup, but I've tested the new distribute method on 64-bit Windows running 32-bit Python and 64-bit Python, and you can now use the same method for all versions of Windows/Python 2.7X:
+OLD Method 2 using distribute:
+
+Download distribute - I threw mine in C:\Python27\Scripts (feel free to create a Scripts directory if it doesn't exist.
+Open up a command prompt (on Windows you should check out conemu2 if you don't use PowerShell) and change (cd) to the directory you've downloaded distribute_setup.py to.
+Run distribute_setup: python distribute_setup.py (This will not work if your python installation directory is not added to your path - go here for help)
+Change the current directory to the Scripts directory for your Python installation (C:\Python27\Scripts) or add that directory, as well as the Python base installation directory to your %PATH% environment variable.
+Install pip using the newly installed setuptools: easy_install pip
+
+The last step will not work unless you're either in the directory easy_install.exe is located in (C:\Python27\Scripts would be the default for Python 2.7), or you have that directory added to your path.
+OLD Method 1 using ez_setup:
+from the setuptools page --
+
+Download ez_setup.py and run it; it will download the appropriate .egg file and install it for you. (Currently, the provided .exe installer does not support 64-bit versions of Python for Windows, due to a distutils installer compatibility issue.
+
+After this, you may continue with:
+
+Add c:\Python2x\Scripts to the Windows path (replace the x in Python2x with the actual version number you have installed)
+Open a new (!) DOS prompt. From there run easy_install pip
+
+","
+So the install is easyinstall, then pip,  then virtualenv, then virtualenvwrapper , then configure independents environments. with script modif in the middle for dealing with proxies... aaarrrgg
+                
+                    – nicolas
+Aug 27 '12 at 9:54
+
+
+
+","
+@nicolas Yeah, easyinstall is just an outdated interface to setuptools. Pip is awesome, and virtualenv offers the kind of control that you don't get in many other languages without WAY more hackish tactics; perl being the only comparable exception. Ruby has gemsets, but in order to easily swap out Rubies, it's recommended to use either rbenv or rvm - both of which have always felt somewhat hackish to me (though they work beautifully once set up properly).
+                
+                    – AndrewPK
+Oct 16 '12 at 19:30
+","
+This exact procedure is automated by pip for windows.
+                
+                    – user474491
+Dec 24 '12 at 21:40
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,May 23 '17,218
+33,"
+2016+ Update: 
+These answers are outdated or otherwise wordy and difficult.
+If you've got Python 3.4+ or 2.7.9+, it will be installed by default on Windows.  Otherwise, in short:
+
+Download the pip installer: 
+https://bootstrap.pypa.io/get-pip.py
+If paranoid, inspect file to confirm it isn't malicious
+(must b64 decode).
+Open a console in the download folder as Admin and run
+get-pip.py.  Alternatively, right-click its icon in Explorer and choose the ""run as Admin..."".
+
+The new binaries pip.exe (and the deprecated easy_install.exe) will be found in the ""%ProgramFiles%\PythonXX\Scripts"" folder (or similar), which is often not in your PATH variable.  I recommend adding it.
+","
+MD5 checksums of the files: get-pip.py=60a3d165e93999895e26b96681b65090  setuptools-1.3.2.tar.gz=441f2e58c0599d31597622a7b9eb605f
+                
+                    – Joris
+Nov 16 '13 at 10:49
+
+
+
+","
+As of pip 1.5.1 (Jan 2014) ez_setup/setuptools/distribute isn't needed ahead of time. If needed get-pip will acquire the requirements as well as pip itself.
+                
+                    – matt wilkie
+Feb 4 '14 at 20:08
+
+
+
+","
+Good overview of python packaging past and present as of Aug 2016: glyph.twistedmatrix.com/2016/08/python-packaging.html
+                
+                    – Dylan Hogg
+Aug 14 '16 at 12:54
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Aug 16 '19,205
+34,"
+Python 3.4, which  was released in March 2014, comes with pip included:
+http://docs.python.org/3.4/whatsnew/3.4.html
+So, since the release of Python 3.4, the up-to-date way to install pip on Windows is to just install Python.
+The recommended way to use it is to call it as a module, especially with multiple python distributions or versions installed, to guarantee packages go to the correct place:
+python -m pip install --upgrade packageXYZ
+https://docs.python.org/3/installing/#work-with-multiple-versions-of-python-installed-in-parallel
+","
+Note that it also applies to Python 2.7.9
+                
+                    – Roberto
+Dec 8 '15 at 15:25
+","
+Python 2.x is legacy, Python 3.x is the present and future of the language, according to Python2orPython3
+                
+                    – matth
+Dec 9 '15 at 9:18
+
+
+
+","
+Hmm I installed Python 3.4.4 and I could find pip3.exe following the path in this answer, but in cmd pip is still not recognized. Can anyone help?
+                
+                    – annena
+Jan 20 '16 at 9:30
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Nov 8 '19,48
+35,"
+When I have to use Windows, I use ActivePython, which automatically adds everything to your PATH and includes a package manager called PyPM which provides binary package management making it faster and simpler to install packages.
+pip and easy_install aren't exactly the same thing, so there are some things you can get through pip but not easy_install and vice versa.
+My recommendation is that you get ActivePython Community Edition and don't worry about the huge hassle of getting everything set up for Python on Windows. Then, you can just use pypm.
+In case you want to use pip you have to check the PyPM option in the ActiveState installer. After installation you only need to logoff and log on again, and pip will be available on the commandline, because it is contained in the ActiveState installer PyPM option and the paths have been set by the installer for you already. PyPM will also be available, but you do not have to use it.
+","
+It must be noted that ActivePython also includes pip and easy_install. PyPM is a binary package manger, while pip/easy_install are, essentially, source package managers. See code.activestate.com/help/faq/…
+                
+                    – Sridhar Ratnakumar
+Feb 21 '11 at 18:08
+","
+@Rafe Kettlet - When I try to install pip in Activepython it gives this error
+                
+                    – Jitendra Vyas
+Aug 6 '12 at 18:24
+","
+@Jitendra - ActivePython already installs pip for you, so there is no need to install it again afterwards.
+                
+                    – mit
+May 31 '13 at 7:39
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,May 23 '17,41
+36,"
+The up-to-date way is to use Windows' package manager Chocolatey.
+Once this is installed, all you have to do is open a command prompt and run the following the three commands below, which will install Python 2.7, easy_install and pip. It will automatically detect whether you're on x64 or x86 Windows.
+cinst python
+cinst easy.install
+cinst pip
+
+All of the other Python packages on the Chocolatey Gallery can be found here.
+","
+And if python is already installed? This caused me nightmares. With python already installed via other means and trying cinst pip just game me errors.
+                
+                    – DevPlayer
+Apr 17 '13 at 8:20
+","
+Chocolatey doesn't seem very robust especially wrt. dependencies. cinst pip at the time of writing just assumes easy_install has been installed, which is not necessarily the case.
+                
+                    – fatuhoku
+Oct 23 '13 at 10:48
+","
+I've edited the question, to make it work you'll need to have easy_install before you get pip, you can just do cinst easy.install
+                
+                    – Philipp Gayret
+Jan 16 '14 at 12:23
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jan 16 '14,39
+37,"
+Update March 2015
+Python 2.7.9 and later (on the Python 2 series), and Python 3.4 and later include pip by default, so you may have pip already.
+If you don't, run this one line command on your prompt (which may require administrator access):
+python -c ""exec('try: from urllib2 import urlopen \nexcept: from urllib.request import urlopen');f=urlopen('https://bootstrap.pypa.io/get-pip.py').read();exec(f)""
+
+It will install pip. If Setuptools is not already installed, get-pip.py will install it for you too.
+As mentioned in comments, the above command will download code from the Pip source code repository at GitHub, and dynamically run it at your environment. So be noticed that this is a shortcut of the steps download, inspect and run, all with a single command using Python itself. If you trust Pip, proceed without doubt.
+Be sure that your Windows environment variable PATH includes Python's folders (for Python 2.7.x default install: C:\Python27 and C:\Python27\Scripts, for Python 3.3x: C:\Python33 and C:\Python33\Scripts, and so on).
+","
+This should work, but it is worth noting that this could be extremely dangerous if one doesn't have the expertise or bother to inspect the url-file before executing such a command.
+                
+                    – Gringo Suave
+Mar 29 '13 at 21:48
+
+
+
+","
+I think the simplicity is worth the risk. We are talking about a hack at python-distribute.org? There is a similar approach with sublime package control.
+                
+                    – Fernando Macedo
+Apr 1 '13 at 20:08
+","
+Yes, I have checked the distribute URL and it is ok (for now at least).  The problem is in the general case where the inexperienced run remote executables on recommendation from a forum.  It should come at least with a minimal warning.
+                
+                    – Gringo Suave
+Apr 3 '13 at 7:46
+
+
+
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,32
+38,"
+Installers
+I've built Windows installers for both distribute and pip here (the goal being to use pip without having to either bootstrap with easy_install or save and run Python scripts):
+
+distribute-0.6.27.win32.exe
+pip-1.1.win32.exe
+
+On Windows, simply download and install first distribute, then pip from the above links. The distribute link above does contain stub .exe installers, and these are currently 32-bit only. I haven't tested the effect on 64-bit Windows.
+Building on Windows
+The process to redo this for new versions is not difficult, and I've included it here for reference.
+Building distribute
+In order to get the stub .exe files, you need to have a Visual C++ compiler (it is apparently compilable with MinGW as well)
+hg clone https://bitbucket.org/tarek/distribute
+cd distribute
+hg checkout 0.6.27
+rem optionally, comment out tag_build and tag_svn_revision in setup.cfg
+msvc-build-launcher.cmd
+python setup.py bdist_win32
+cd ..
+echo build is in distribute\dist
+
+Building pip
+git clone https://github.com/pypa/pip.git
+cd pip
+git checkout 1.1
+python setup.py bdist_win32
+cd ..
+echo build is in pip\dist
+
+","
+Ah, I missed that there's a launcher.c that needs manual compiling... adjusted and rebuilt distribute - that does mean that this is win32-only...
+                
+                    – David Fraser
+Jul 3 '12 at 13:49
+",null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jul 3 '12,26
+39,"
+The following works for Python 2.7. Save this script and launch it:  
+https://raw.github.com/pypa/pip/master/contrib/get-pip.py  
+Pip is installed, then add the path to your environment : 
+C:\Python27\Scripts
+
+Finally
+pip install virtualenv
+
+Also you need Microsoft Visual C++ 2008 Express to get the good compiler and avoid these kind of messages when installing packages:
+error: Unable to find vcvarsall.bat
+
+If you have a 64-bit version of Windows 7, you may read 64-bit Python installation issues on 64-bit Windows 7 to successfully install the Python executable package (issue with registry entries).
+","
+link not working. please update it
+                
+                    – swapnil gandhi
+Nov 29 '18 at 5:36
+",null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,21
+40,"
+To install pip globally on Python 2.x, easy_install appears to be the best solution as Adrián states.
+However the installation instructions for pip recommend using virtualenv since every virtualenv has pip installed in it automatically.  This does not require root access or modify your system Python installation.
+Installing virtualenv still requires easy_install though.
+2018 update: 
+Python 3.3+ now includes the venv module for easily creating virtual environments like so:
+python3 -m venv /path/to/new/virtual/environment
+See documentation for different platform methods of activating the environment after creation, but typically one of:
+$ source <venv>/bin/activate 
+
+C:\> <venv>\Scripts\activate.bat
+
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jun 5 '18,18
+41,"
+For latest Python Download - I have python 3.6 on windows. You don't have to wonder everything you need is there , take  a breath i will show you how to do it.
+
+make sure where you install python for me its was in the following directory
+
+
+
+Now , lets add python and pip into environment variable path settings
+  if you are on windows, so that typing pip or python anywhere call
+  python aor pip from where they are installed.
+
+So, PIP is found under the folder in above screen ""SCRIPTS""
+Lets add Python and PIP in environment variable path. 
+
+Almost Done , Let test with CMD to install goole package using pip.
+pip install google
+
+
+BYE BYE! 
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jun 8 '17,17
+42,"
+To use pip, it is not mandatory that you need to install pip in the system directly. You can use it through virtualenv. What you can do is follow these steps:
+
+Download virtualenv tar.gz file from https://pypi.python.org/pypi/virtualenv
+Unzip it with 7zip or some other tool
+
+We normally need to install Python packages for one particular project. So, now create a project folder, let’s say myproject.
+
+Copy the virtualenv.py file from the decompressed folder of virtualenv, and paste inside the myproject folder
+
+Now create a virtual environment, let’s say myvirtualenv as follows, inside the myproject folder:
+python virtualenv.py myvirtualenv
+
+It will show you:
+New python executable in myvirtualenv\Scripts\python.exe
+Installing setuptools....................................done.
+Installing pip.........................done.
+
+Now your virtual environment, myvirtualenv, is created inside your project folder. You might notice, pip is now installed inside you virtual environment. All you need to do is activate the virtual environment with the following command.
+myvirtualenv\Scripts\activate
+
+You will see the following at the command prompt:
+(myvirtualenv) PATH\TO\YOUR\PROJECT\FOLDER>pip install package_name
+
+Now you can start using pip, but make sure you have activated the virtualenv looking at the left of your prompt.
+This is one of the easiest way to install pip i.e. inside virtual environment, but you need to have virtualenv.py file with you.
+For more ways to install pip/virtualenv/virtualenvwrapper, you can refer to thegauraw.tumblr.com.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,16
+43,"
+I just wanted to add one more solution for those having issues installing setuptools from Windows 64-bit. The issue is discussed in this bug on python.org and is still unresolved as of the date of this comment. A simple workaround is mentioned and it works flawlessly. One registry change did the trick for me.
+Link: http://bugs.python.org/issue6792#
+Solution that worked for me...:
+Add this registry setting for 2.6+ versions of Python:
+ [HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Python\PythonCore\2.6\InstallPath]
+ @=""C:\\Python26\\""
+
+This is most likely the registry setting you will already have for Python 2.6+:
+ [HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.6\InstallPath]
+ @=""C:\\Python26\\""
+
+Clearly, you will need to replace the 2.6 version with whatever version of Python you are running.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,15
+44,"
+Updated at 2016 : Pip should already be included in Python 2.7.9+ or 3.4+, but if for whatever reason it is not there, you can use the following one-liner.
+
+Download https://bootstrap.pypa.io/get-pip.py and run it with Administrator permission python get-pip.py (If you are on Linux, use sudo python get-pip.py)
+
+PS:
+
+This should already be satisfied in most cases but, if necessary, be sure that your environment variable PATH includes Python's folders (for example, Python 2.7.x on Windows default install: C:\Python27 and C:\Python27\Scripts, for Python 3.3x: C:\Python33 and C:\Python33\Scripts, etc)
+I encounter same problem and then found such perhaps easiest way (one liner!) mentioned on official website here: http://www.pip-installer.org/en/latest/installing.html
+
+Can't believe there are so many lengthy (perhaps outdated?) answers out there. Feeling thankful to them but, please up-vote this short answer to help more new comers!
+","
+I believe you'll still need distribute or setuptools.
+                
+                    – Gringo Suave
+Jan 18 '13 at 20:58
+","
+On my system, I also needed to add C:\Python33\Scripts to the PATH.
+                
+                    – joshuanapoli
+Mar 6 '13 at 17:52
+","
+You forgot to mention you don't have firewall issues
+                
+                    – flywire
+May 28 '18 at 7:09
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jan 16 '17,15
+45,"
+The best way I found so far, is just two lines of code:
+curl http://python-distribute.org/distribute_setup.py | python
+curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+
+It was tested on Windows 8 with PowerShell, Cmd, and Git Bash (MinGW).
+And you probably want to add the path to your environment. It's somewhere like C:\Python33\Scripts.
+","
+Curl isn't shipped with windows.
+                
+                    – Gringo Suave
+Mar 29 '13 at 21:37
+","
+@GringoSuave Curl is so commonly used, everyone should have it. If that's not preferred, these two scripts can be just downloaded with any browser directly.
+                
+                    – h--n
+Mar 30 '13 at 17:24
+","
+Combine this with @Fernando's answer, stackoverflow.com/a/15294806/14420, for how to do the same without curl.
+                
+                    – matt wilkie
+Apr 16 '13 at 5:04
+",https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,14
+46,"
+Here how to install pip with easy way.
+
+copy and paste these content in a file as get-pip.py
+copy and paste get-pip.py into python folder.C:\Python27
+Double click to get-pip.py file.it will install pip to your computer.
+Now you have to add C:\Python27\Scripts path to your enviroment variable.Because it includes pip.exe file.
+Now you are ready to use pip. Open cmd and type as pip install package_name
+
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Mar 29 '16,13
+47,"
+PythonXY comes with pip included, among others.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jul 16 '13,12
+48,"
+I use the cross-platform Anaconda package manager from continuum.io on Windows and it is reliable.  It has virtual environment management and a fully featured shell with common utilities (e.g. conda, pip).
+> conda install <package>               # access distributed binaries
+
+> pip install <package>                 # access PyPI packages 
+
+conda also comes with binaries for libraries with non-Python dependencies, e.g. pandas, numpy, etc.  This proves useful particularly on Windows as it can be  hard to correctly compile C dependencies.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jan 18 '17,12
+49,"
+I had some issues installing in different ways when I followed instructions here. I think it's very tricky to install in every Windows environment in the same way. In my case I need Python 2.6, 2.7 and 3.3 in the same machine for different purposes so that's why I think there're more problems.
+But the following instructions worked perfectly for me, so might be depending on your environment you should try this one:
+http://docs.python-guide.org/en/latest/starting/install/win/
+Also, due to the different environments I found incredible useful to use Virtual Environments, I had websites that use different libraries and it's much better to encapsulate them into a single folder, check out the instructions, briefly if PIP is installed you just install VirtualEnv:
+pip install virtualenv
+
+Into the folder you have all your files run
+virtualenv venv
+
+And seconds later you have a virtual environment with everything in venv folder, to activate it run venv/Scripts/activate.bat (deactivate the environment is easy, use deactivate.bat). Every library you install will end up in venv\Lib\site-packages and it's easy to move your whole environment somewhere.
+The only downside I found is some code editors can't recognize this kind of environments, and you will see warnings in your code because imported libraries are not found. Of course there're tricky ways to do it but it would be nice editors keep in mind Virtual Environments are very normal nowadays.
+Hope it helps.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jan 6 '14,10
+50,"
+
+Download script: https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+Save it on drive somewhere like C:\pip-script\get-pip.py
+Navigate to that path from command prompt and run "" python get-pip.py ""
+
+Guide link: http://www.pip-installer.org/en/latest/installing.html#install-pip
+Note: Make sure scripts path like this (C:\Python27\Scripts) is added int %PATH% environment variable as well.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Sep 24 '14,8
+51,"
+It's very simple:
+Step 1: wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+Step 2: wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+Step 2: python ez_setup.py
+Step 3: python get-pip.py
+
+(Make sure your Python and Python script directory (for example, C:\Python27 and C:\Python27\Scripts) are in the PATH.)
+","
+I don't see scripts folder on my machine I am using python 3.3
+                
+                    – Dejell
+Dec 15 '13 at 10:19
+",null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,5
+52,"
+Working as of Feb 04 2014 :):
+If you have tried installing pip through the Windows installer file from http://www.lfd.uci.edu/~gohlke/pythonlibs/#pip as suggested by @Colonel Panic, you might have installed the pip package manager successfully, but you might be unable to install any packages with pip. You might also have got the same SSL error as I got when I tried to install Beautiful Soup 4 if you look in the pip.log file:
+Downloading/unpacking beautifulsoup4
+  Getting page https://pypi.python.org/simple/beautifulsoup4/
+  Could not fetch URL https://pypi.python.org/simple/beautifulsoup4/: **connection error: [Errno 1] _ssl.c:504: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed**
+  Will skip URL https://pypi.python.org/simple/beautifulsoup4/ when looking for download links for beautifulsoup4
+
+The problem is an issue with an old version of OpenSSL being incompatible with pip 1.3.1 and above versions. The easy workaround for now, is to install pip 1.2.1, which does not require SSL:
+Installing Pip on Windows:
+
+Download pip 1.2.1 from https://pypi.python.org/packages/source/p/pip/pip-1.2.1.tar.gz
+Extract the pip-1.2.1.tar.gz file
+Change directory to the extracted folder: cd <path to extracted folder>/pip-1.2.1
+Run python setup.py install
+Now make sure C:\Python27\Scripts is in PATH because pip is installed in the C:\Python27\Scripts directory unlike C:\Python27\Lib\site-packages where Python packages are normally installed
+
+Now try to install any package using pip.
+For example, to install the requests package using pip, run this from cmd:
+pip install requests
+
+Whola! requests will be successfully installed and you will get a success message.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,5
+53,"
+pip is already installed if you're using Python 2 >=2.7.9 or Python 3 >=3.4 binaries downloaded from python.org, but you'll need to upgrade pip.
+On Windows upgrade can be done easily 
+Go to Python command line and run below Python command
+python -m pip install -U pip
+Installing with get-pip.py
+Download get-pip.py in the same folder or any other folder of your choice. I am assuming you will download it in the same folder from you have python.exe file and run this command 
+python get-pip.py
+
+Pip's installation guide is pretty clean and simple.
+Using this you should be able to get started with Pip in under two minutes.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Aug 9 '16,5
+54,"
+if you even have other problems with pip version you can try this 
+pip install --trusted-host pypi.python.org --upgrade pip
+
+","
+How can they use pip if its not installed??
+                
+                    – john ktejik
+Aug 21 '19 at 23:09
+
+
+
+",null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jun 14 '17,4
+55,"
+Installing Pip for Python2 and Python3
+
+Download get-pip.py to a folder on your computer.
+Open a command prompt and navigate to the folder containing get-pip.py.
+Run the following command:python get-pip.py, python3 get-pip.py or  python3.6 get-pip.py, depending on which version of python you want to install pip
+Pip should be now installed!
+
+
+Old answer (still valid)
+Have you tried ?
+python -m ensurepip
+
+it's probably the easiest to install pip on any system.
+","
+It may not be available for your OS or python version. I  updated the answer, give it a try.
+                
+                    – Pedro Lobito
+Apr 25 '19 at 12:38
+",null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Apr 25 '19,3
+56,"
+Simple CMD way
+Use CURL to download get-pip.py
+curl --http1.1 https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+
+Execute downloaded python file
+python get-pip.py
+
+Then add C:\Python37\Scripts path to your environment variable. Assumes that there is a Python37 folder in your C drive, that folder name may varied according to the installed python version
+Now you can install python packages by running
+pip install awesome_package_name
+
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Sep 13 '19,3
+57,"
+Just download setuptools-15.2.zip (md5), from here https://pypi.python.org/pypi/setuptools#windows-simplified , and run ez_setup.py.
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,May 5 '15,2
+58,"
+Alternatively, you can get pip-Win which is an all-in-one installer for pip and virtualenv on Windows and its GUI.
+
+Switch from one Python interpreter (i.e. version) to another (including py and pypy)
+See all installed packages, and whether they are up-to-date
+Install or upgrade a package, or upgrade pip itself
+Create and delete virtual environments, and switch between them
+Run the IDLE or another Python script, with the selected interpreter
+
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Feb 6 '16,2
+59,"
+Now, it is bundled with Python. You don't need to install it.
+pip -V
+
+This is how you can check whether pip is installed or not.
+In rare case, if it is not installed, download get-pip.py file and run it with python as
+python get-pip.py
+
+",null,null,null,https://stackoverflow.com//questions/4750806/how-to-install-pip-on-windows,How to install pip on Windows?,Jan 29 '18,2
+60,"
+I'm not sure if it's exactly your problem, but in my case, I wasn't able to upgrade Django to 1.2.4 - I was always finishing with 1.2.3 version, so I uninstalled Django with:
+<virtualenv>/bin/pip uninstall Django
+
+Then I removed <virtualenv>/build/Django directory and finally I installed the proper version with:
+<virtualenv>/bin/pip install Django
+
+Hope this will help.
+","
+This is not the best practice. Use pip install Django -U or pip install Django --upgrade as described in @JoeyG 's answer.
+                
+                    – Ahmad
+Jul 26 '18 at 3:05
+","
+@Ahmad agree. There should be a smooth update process in pip and virtual env.
+                
+                    – Parth Joshi
+Jul 16 '19 at 17:45
+",null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Apr 10 '14,58
+61,"
+I ran the following command and it upgraded from 1.2.3 to 1.4.0
+pip install Django --upgrade
+
+Shortcut for upgrade:
+pip install Django -U
+
+Note: if the package you are upgrading has any requirements this command will additionally upgrade all the requirements to the latest versions available.  In recent versions of pip, you can prevent this behavior by specifying --upgrade-strategy only-if-needed.  With that flag, dependencies will not be upgraded unless the installed versions of the dependent packages no longer satisfy the requirements of the upgraded package.
+","
+This for me updated all my packaged and totally messed up everything!!!! Documents states: --upgrade all packages to the newest available version. Is this correct or did I do something wrong?
+                
+                    – Prometheus
+Nov 10 '14 at 12:12
+","
+@OrbiterFleet I needed to update ""requests"" so I did pip install Requests --upgrade and only ""requests"" was upgraded.  The description says ""upgrade all specified packages"" when I view the docs.
+                
+                    – harperville
+Jan 28 '15 at 14:14
+","
+ATTENTION, it also updates all dependencies and can mess up with everything. the best option is to uninstall and reinstall the package.
+                
+                    – marcelosalloum
+May 7 '15 at 13:54
+",https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Nov 29 '16,1231
+62,"
+according to pip docs example 3
+pip install --upgrade django
+
+but based on my experience, using this method will also upgrade any package related to it. example:
+Assume you want to upgrade somepackage that require django >= 1.2.4 using this kind of method it will also upgrade somepackage AND django to the newest update. Just to be safe do :
+# assume you want to keep django 1.2.4
+pip install --upgrade somepackage django==1.2.4
+
+Doing this will upgrade somepackage and keeping django to 1.2.4 version
+",null,null,null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Oct 15 '15,51
+63,"
+The shortcut command for --upgrade:
+pip install Django --upgrade
+
+Is:
+pip install Django -U
+
+","
+How about editing the existing answer to add this bit of information instead of an (incomplete) answer?
+                
+                    – a1an
+Jun 2 '15 at 8:18
+","
+@a1an please suggest what extra info that you think should be added in a ""suggested edit"". Thanks
+                
+                    – Aaron Lelevier
+Jun 2 '15 at 14:22
+","
+I mean you could edit the answer given by JoeyG, adding the shortcut option you provided in context there.
+                
+                    – a1an
+Jun 3 '15 at 9:39
+",https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Aug 31 '14,32
+64,"
+If you upgrade a package, the old one will be uninstalled.  
+A convenient way to do this is to use this pip-upgrader which also updates the versions in your requirements.txt file for the chosen packages (or all packages).
+Installation
+pip install pip-upgrader
+
+Usage
+Activate your virtualenv (important, because it will also install the new versions of upgraded packages in current virtualenv).
+cd into your project directory, then run:
+pip-upgrade
+
+Advanced usage
+If the requirements are placed in a non-standard location, send them as arguments:
+pip-upgrade path/to/requirements.txt
+
+If you already know what package you want to upgrade, simply send them as arguments:
+pip-upgrade -p django -p celery -p dateutil
+
+If you need to upgrade to  pre-release / post-release version, add --prerelease argument to your command.
+Full disclosure: i wrote this package. Hope it helps.
+","
+is there an option to upgrade all packages at once (ie, without listing them) with this approach?
+                
+                    – Bjorks number one fan
+May 18 '18 at 14:37
+","
+@MikePalmice yes: pip-upgrade -p all will upgrade all your packages and update requirements file without needing any input from you.
+                
+                    – Simion Agavriloaei
+May 21 '18 at 7:30
+
+
+
+",null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Apr 27 '17,17
+65,"
+If you only want to upgrade one specific package called somepackage, the command you should use in recent versions of pip is 
+pip install --upgrade --upgrade-strategy only-if-needed somepackage
+
+This is very useful when you developed an application in django that currently will only work with a specific version of django (say Django=1.9.x) and want to upgrade some dependent package with a bug-fix/new feature and the upgraded package depends on django (but works with say any version of django after 1.5).  The default behavior of pip install --upgrade django-some-package would be to upgrade django to the latest version available which could otherwise break your application, though with the --upgrade-strategy only-if-needed dependent packages will now only be upgraded as necessary.
+",null,null,null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Nov 29 '16,15
+66,"
+Normally, pip will clean up after itself and remove the contents of the build directory. The only time it doesn't do this is if:
+
+You used the --no-install option
+You are using editable packages
+The installation was cancelled or was otherwise interrupted.
+
+In all other cases, you shouldn't have build directory that's clogging your environment.
+",null,null,null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,May 4 '12,4
+67,"
+that solved for me the issue ""pip install -I --upgrade psutil --force"" 
+afterwards just uninstall psutil with the new version and hop you can suddenly install the older version (:
+",null,null,null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Jul 14 '19,0
+68,"
+I use this: 
+pip3 install -r  requirements.txt  
+
+",null,null,null,https://stackoverflow.com//questions/4536103/how-can-i-upgrade-specific-packages-using-pip-and-a-requirements-file,How can I upgrade specific packages using pip and a requirements file?,Oct 4 '19,0
+69,"
+Maybe I missed the question, but why not:
+class MyException(Exception):
+    pass
+
+Edit: to override something (or pass extra args), do this:
+class ValidationError(Exception):
+    def __init__(self, message, errors):
+
+        # Call the base class constructor with the parameters it needs
+        super(ValidationError, self).__init__(message)
+
+        # Now for your custom code...
+        self.errors = errors
+
+That way you could pass dict of error messages to the second param, and get to it later with e.errors
+
+Python 3 Update: In Python 3+, you can use this slightly more compact use of super():
+class ValidationError(Exception):
+    def __init__(self, message, errors):
+
+        # Call the base class constructor with the parameters it needs
+        super().__init__(message)
+
+        # Now for your custom code...
+        self.errors = errors
+
+","
+However an exception defined like this would not be pickable; see the discussion here stackoverflow.com/questions/16244923/…
+                
+                    – jiakai
+Aug 1 '17 at 2:54
+","
+@jiakai means ""picklable"". :-)
+                
+                    – Robino
+Sep 15 '17 at 13:39
+
+
+
+","
+Following the documentation of python for user-defined exceptions, the names that are mentioned in the __init__ function are incorrect. Instead of (self,message,error) it is (self,expression,message). The attribute expression is the input expression in which the error occurred and the message is an explanation of the error.
+                
+                    – ddleon
+Feb 27 at 15:13
+
+
+
+",https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Mar 26 '18,1254
+70,"
+With modern Python Exceptions, you don't need to abuse .message, or override .__str__() or .__repr__() or any of it. If all you want is an informative message when your exception is raised, do this:
+class MyException(Exception):
+    pass
+
+raise MyException(""My hovercraft is full of eels"")
+
+That will give a traceback ending with MyException: My hovercraft is full of eels.
+If you want more flexibility from the exception, you could pass a dictionary as the argument:
+raise MyException({""message"":""My hovercraft is full of animals"", ""animal"":""eels""})
+
+However, to get at those details in an except block is a bit more complicated. The details are stored in the args attribute, which is a list. You would need to do something like this:
+try:
+    raise MyException({""message"":""My hovercraft is full of animals"", ""animal"":""eels""})
+except MyException as e:
+    details = e.args[0]
+    print(details[""animal""])
+
+It is still possible to pass in multiple items to the exception and access them via tuple indexes, but this is highly discouraged (and was even intended for deprecation a while back). If you do need more than a single piece of information and the above method is not sufficient for you, then you should subclass Exception as described in the tutorial.
+class MyError(Exception):
+    def __init__(self, message, animal):
+        self.message = message
+        self.animal = animal
+    def __str__(self):
+        return self.message
+
+","
+""but this will be deprecated in the future"" - is this still intended for deprecation? Python 3.7 still seems to happily accept Exception(foo, bar, qux).
+                
+                    – mtraceur
+Apr 20 '18 at 22:36
+
+
+
+","
+It haven't seen any recent work to depricate it since the last attempt failed due to the pain of transitioning, but that usage is still discouraged. I will update my answer to reflect that.
+                
+                    – frnknstn
+May 2 '18 at 8:20
+","
+@frnknstn, why it is discouraged? Looks like a nice idiom for me.
+                
+                    – neves
+May 8 '18 at 17:48
+",https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,May 10 '18,473
+71,"
+
+""Proper way to declare custom exceptions in modern Python?""
+
+This is fine, unless your exception is really a type of a more specific exception:
+class MyException(Exception):
+    pass
+
+Or better (maybe perfect), instead of pass give a docstring:
+class MyException(Exception):
+    """"""Raise for my specific kind of exception""""""
+
+Subclassing Exception Subclasses
+From the docs
+
+Exception
+All built-in, non-system-exiting exceptions are derived from this class. 
+  All user-defined exceptions should also be derived from this
+  class.
+
+That means that if your exception is a type of a more specific exception, subclass that exception instead of the generic Exception (and the result will be that you still derive from Exception as the docs recommend). Also, you can at least provide a docstring (and not be forced to use the pass keyword):
+class MyAppValueError(ValueError):
+    '''Raise when my specific value is wrong'''
+
+Set attributes you create yourself with a custom __init__. Avoid passing a dict as a positional argument, future users of your code will thank you. If you use the deprecated message attribute, assigning it yourself will avoid a DeprecationWarning:
+class MyAppValueError(ValueError):
+    '''Raise when a specific subset of values in context of app is wrong'''
+    def __init__(self, message, foo, *args):
+        self.message = message # without this you may get DeprecationWarning
+        # Special attribute you desire with your Error, 
+        # perhaps the value that caused the error?:
+        self.foo = foo         
+        # allow users initialize misc. arguments as any other builtin Error
+        super(MyAppValueError, self).__init__(message, foo, *args) 
+
+There's really no need to write your own __str__ or __repr__. The builtin ones are very nice, and your cooperative inheritance ensures that you use it.
+Critique of the top answer
+
+Maybe I missed the question, but why not:
+
+class MyException(Exception):
+    pass
+
+Again, the problem with the above is that in order to catch it, you'll either have to name it specifically (importing it if created elsewhere) or catch Exception, (but you're probably not prepared to handle all types of Exceptions, and you should only catch exceptions you are prepared to handle). Similar criticism to the below, but additionally that's not the way to initialize via super, and you'll get a DeprecationWarning if you access the message attribute:
+
+Edit: to override something (or pass extra args), do this:
+
+class ValidationError(Exception):
+    def __init__(self, message, errors):
+
+        # Call the base class constructor with the parameters it needs
+        super(ValidationError, self).__init__(message)
+
+        # Now for your custom code...
+        self.errors = errors
+
+
+That way you could pass dict of error messages to the second param, and get to it later with e.errors
+
+It also requires exactly two arguments to be passed in (aside from the self.) No more, no less. That's an interesting constraint that future users may not appreciate. 
+To be direct - it violates Liskov substitutability.
+I'll demonstrate both errors:
+>>> ValidationError('foo', 'bar', 'baz').message
+
+Traceback (most recent call last):
+  File ""<pyshell#10>"", line 1, in <module>
+    ValidationError('foo', 'bar', 'baz').message
+TypeError: __init__() takes exactly 3 arguments (4 given)
+
+>>> ValidationError('foo', 'bar').message
+__main__:1: DeprecationWarning: BaseException.message has been deprecated as of Python 2.6
+'foo'
+
+Compared to: 
+>>> MyAppValueError('foo', 'FOO', 'bar').message
+'foo'
+
+","
+Hello from 2018! BaseException.message is gone in Python 3, so the critique only holds for old versions, right?
+                
+                    – Kos
+Jan 3 '18 at 18:21
+","
+@Kos The critique about Liskov Substitutability is still valid. The semantics of the first argument as a ""message"" are also arguably questionable, but I don't think I'll argue the point. I'll give this more of a look when I have more free time.
+                
+                    – Aaron Hall♦
+Jan 3 '18 at 19:02
+","
+FWIW, for Python 3 (at least for 3.6+), one would redefine the __str__ method of MyAppValueError instead of relying on the message attribute
+                
+                    – Jacquot
+Mar 18 '18 at 23:39
+",https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Feb 23 '17,191
+72,"
+see how exceptions work by default if one vs more attributes are used (tracebacks omitted):
+>>> raise Exception('bad thing happened')
+Exception: bad thing happened
+
+>>> raise Exception('bad thing happened', 'code is broken')
+Exception: ('bad thing happened', 'code is broken')
+
+so you might want to have a sort of ""exception template"", working as an exception itself, in a compatible way:
+>>> nastyerr = NastyError('bad thing happened')
+>>> raise nastyerr
+NastyError: bad thing happened
+
+>>> raise nastyerr()
+NastyError: bad thing happened
+
+>>> raise nastyerr('code is broken')
+NastyError: ('bad thing happened', 'code is broken')
+
+this can be done easily with this subclass
+class ExceptionTemplate(Exception):
+    def __call__(self, *args):
+        return self.__class__(*(self.args + args))
+# ...
+class NastyError(ExceptionTemplate): pass
+
+and if you don't like that default tuple-like representation, just add __str__ method to the ExceptionTemplate class, like:
+    # ...
+    def __str__(self):
+        return ': '.join(self.args)
+
+and you'll have
+>>> raise nastyerr('code is broken')
+NastyError: bad thing happened: code is broken
+
+",null,null,null,https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Aug 7 '13,49
+73,"
+As of Python 3.8 (2018, https://docs.python.org/dev/whatsnew/3.8.html), the recommended method is still:
+class CustomExceptionName(Exception):
+    """"""Exception raised when very uncommon things happen""""""
+    pass
+
+Please don't forget to document, why a custom exception is neccessary!
+If you need to, this is the way to go for exceptions with more data:
+class CustomExceptionName(Exception):
+    """"""Still an exception raised when uncommon things happen""""""
+    def __init__(self, message, payload=None):
+        self.message = message
+        self.payload = payload # you could add more args
+    def __str__(self):
+        return str(self.message) # __str__() obviously expects a string to be returned, so make sure not to send any other data types
+
+and fetch them like:
+try:
+    raise CustomExceptionName(""Very bad mistake."", ""Forgot upgrading from Python 1"")
+except CustomExceptionName as error:
+    print(str(error)) # Very bad mistake
+    print(""Detail: {}"".format(error.payload)) # Detail: Forgot upgrading from Python 1
+
+payload=None is important to make it pickle-able. Before dumping it, you have to call error.__reduce__(). Loading will work as expected.
+You maybe should investigate in finding a solution using pythons return statement if you need much data to be transferred to some outer structure. This seems to be clearer/more pythonic to me. Advanced exceptions are heavily used in Java, which can sometimes be annoying, when using a framework and having to catch all possible errors.
+","
+At the very least, the current docs indicate this is the way to do it (at least without the __str__) rather than other answers that use super().__init__(...).. Just a shame that overrides for __str__ and __repr__ are probably necessary just for better ""default"" serializing.
+                
+                    – kevlarr
+Mar 26 '19 at 16:46
+
+
+
+","
+Honest question: Why is it important for exceptions to be pickle-able? What are the use cases for dumping and loading exceptions?
+                
+                    – Roel Schroeven
+Aug 6 '19 at 15:21
+","
+@RoelSchroeven: I had to parallelize code once. Ran fine single process, but aspects of some of its classes were not serializable (lambda function being passed as objects). Took me some time figuring it out & fixing it. Meaning someone later may end up needing your code to be serialize, be unable to do it, and have to dig up why... My issue wasn't unpickeable errors, but I can see it causing similar problems.
+                
+                    – logicOnAbstractions
+Oct 6 '19 at 2:58
+",https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Apr 28 '19,28
+74,"
+You should override __repr__ or __unicode__ methods instead of using message, the args you provide when you construct the exception will be in the args attribute of the exception object.
+",null,null,null,https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Aug 18 '17,17
+75,"
+No, ""message"" is not forbidden. It's just deprecated. You application will work fine with using message. But you may want to get rid of the deprecation error, of course.
+When you create custom Exception classes for your application, many of them do not subclass just from Exception, but from others, like ValueError or similar. Then you have to adapt to their usage of variables.
+And if you have many exceptions in your application it's usually a good idea to have a common custom base class for all of them, so that users of your modules can do
+try:
+    ...
+except NelsonsExceptions:
+    ...
+
+And in that case you can do the __init__ and __str__ needed there, so you don't have to repeat it for every exception. But simply calling the message variable something else than message does the trick.
+In any case, you only need the __init__ or __str__ if you do something different from what Exception itself does. And because if the deprecation, you then need both, or you get an error. That's not a whole lot of extra code you need per class. ;)
+","
+It's interesting that Django exceptions don't inherit from a common base. docs.djangoproject.com/en/2.2/_modules/django/core/exceptions Do you have a good example when catching all exceptions from a specific application is needed? (maybe it is useful only for some specific types of applications).
+                
+                    – Yaroslav Nikitenko
+Jun 10 '19 at 20:05
+","
+I found a good article on this topic, julien.danjou.info/python-exceptions-guide . I think that Exceptions should be subclassed primarily domain-based, not application-based. When your app is about HTTP protocol, you derive from HTTPError. When part of your app is TCP, you derive that part's exceptions from TCPError. But if your app spans a lot of domains (file, permissions, etc), the reason to have a MyBaseException diminishes. Or is it to protect from 'layer violation'?
+                
+                    – Yaroslav Nikitenko
+Jun 10 '19 at 20:44
+",null,https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Aug 23 '09,8
+76,"
+See a very good article ""The definitive guide to Python exceptions"". The basic principles are:
+
+Always inherit from (at least) Exception.
+Always call BaseException.__init__ with only one argument.
+When building a library, define a base class inheriting from Exception.
+Provide details about the error. 
+Inherit from builtin exceptions types when it makes sense.
+
+There is also information on organizing (in modules) and wrapping exceptions, I recommend to read the  guide.
+","
+This is a good example of why on SO I usually check the most upvoted answer, but the most recent ones as well. Usefull addition, thanks.
+                
+                    – logicOnAbstractions
+Oct 5 '19 at 18:09
+","
+Always call BaseException.__init__ with only one argument. Seems like unneeded constraint, since it actually accepts any number of arguments.
+                
+                    – Eugene Yarmash
+Feb 29 at 13:12
+
+
+
+","
+@EugeneYarmash I agree, now I don't understand that. I don't use it anyway. Maybe I should reread the article and expand my answer.
+                
+                    – Yaroslav Nikitenko
+Feb 29 at 13:56
+",https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Jun 10 '19,5
+77,"
+Try this Example
+class InvalidInputError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return repr(self.msg)
+
+inp = int(input(""Enter a number between 1 to 10:""))
+try:
+    if type(inp) != int or inp not in list(range(1,11)):
+        raise InvalidInputError
+except InvalidInputError:
+    print(""Invalid input entered"")
+
+",null,null,null,https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Jul 22 '18,2
+78,"
+To define your own exceptions correctly, there are a few best practices that you need to follow:
+
+Define a base class inheriting from Exception. This will allow to catch any exception related to the project (more specific exceptions should inherit from it):
+class MyProjectError(Exception):
+    """"""A base class for MyProject exceptions.""""""
+
+Organizing these exception classes in a separate module (e.g. exceptions.py) is generally a good idea.
+To pass extra arguments to your exception, define a custom __init__() method with optional arguments. Call the base class's __init__() passing any positional arguments to it (remember that BaseException/Exception expect any number of positional arguments):
+class CustomError(MyProjectError):
+    def __init__(self, *args, extra_arg=None):
+        super().__init__(*args)
+        self.extra_arg = extra_arg
+
+To raise such exception with an extra argument you can use:
+raise CustomError('Something bad happened', extra_arg='foo')
+
+This design actually adheres to the Liskov substitution principle since you can replace an instance of a base exception class with an instance of a derived exception class.
+
+",null,null,null,https://stackoverflow.com//questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python,Proper way to declare custom exceptions in modern Python?,Feb 29 at,0
+79,"
+There isn't a built-in flag yet, but you can use
+pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+
+Note: there are infinite potential variations for this. I'm trying to keep this answer short and simple, but please do suggest variations in the comments!
+In older version of pip, you can use this instead:
+pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+
+The grep is to skip editable (""-e"") package definitions, as suggested by @jawache. (Yes, you could replace grep+cut with sed or awk or perl or...).
+The -n1 flag for xargs prevents stopping everything if updating one package fails (thanks @andsens).
+","
+Right :( The issue now lives at github.com/pypa/pip/issues/59 . But every suggestion seems to be answered with ""Yeah, but I'm too sure if X is the right way to do Y""... Now is better than never? Practicality beats purity? :(
+                
+                    – rbp
+Aug 12 '11 at 8:40
+","
+It also prints those packages that were installed with a normal package manager (like apt-get or Synaptic). If I execute this pip install -U, it will update all packages. I'm afraid it can cause some conflict with apt-get.
+                
+                    – Jabba
+Sep 13 '11 at 4:11
+","
+How about changing grep to: egrep -v '^(\-e|#)' (i get this line when running it on ubuntu 12.10: ""## FIXME: could not find svn URL in dependency_links for this package:"".
+                
+                    – LasseValentini
+Mar 5 '13 at 14:29
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Aug 6 '18,2152
+80,"
+You can use the following Python code. Unlike pip freeze, this will not print warnings and FIXME errors.
+For pip < 10.0.1
+import pip
+from subprocess import call
+
+packages = [dist.project_name for dist in pip.get_installed_distributions()]
+call(""pip install --upgrade "" + ' '.join(packages), shell=True)
+
+For pip >= 10.0.1
+import pkg_resources
+from subprocess import call
+
+packages = [dist.project_name for dist in pkg_resources.working_set]
+call(""pip install --upgrade "" + ' '.join(packages), shell=True)
+
+","
+This works amazingly well…  It's always so satisfying when a task takes a REALLY long time…  and gives you a bunch of new stuff!  PS: Run it as root if you're on OS X!
+                
+                    – Alex Gray
+Dec 31 '11 at 4:13
+
+
+
+","
+Is there no way to install using pip without calling a subprocess?  Something like import pip pip.install('packagename')?
+                
+                    – endolith
+Mar 6 '12 at 16:18
+","
+I wrapped this up in a fabfile.py. Thanks!
+                
+                    – Josh K
+Apr 29 '13 at 21:54
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Sep 17 '18,657
+81,"
+To upgrade all local packages; you could use pip-review:
+$ pip install pip-review
+$ pip-review --local --interactive
+
+
+pip-review is a fork of pip-tools. See pip-tools issue mentioned by @knedlsepp. pip-review package works but pip-tools package no longer works.
+pip-review works on Windows since version 0.5.
+","
+@hauzer: It doesn't support Python 3. Though it might be a bug
+                
+                    – jfs
+Apr 25 '14 at 0:27
+
+
+
+","
+@mkoistinen It's a good tool but until it's merged in PIP it means installing something additional which not everyone may desire to do.
+                
+                    – Wernight
+Jul 22 '14 at 8:50
+","
+@Daniel: pip-tools no longer works, pip-review (fork of pip-tools) works.
+                
+                    – jfs
+Oct 12 '15 at 6:00
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,May 23 '17,629
+82,"
+Works on Windows. Should be good for others too.
+($ is whatever directory you're in, in command prompt. eg. C:/Users/Username>)
+do
+$ pip freeze > requirements.txt
+
+open the text file, replace the == with >= , and execute 
+$ pip install -r requirements.txt --upgrade
+
+If you have a problem with a certain package stalling the upgrade (numpy sometimes), just go to the directory ($), comment out the name (add a # before it) and run the upgrade again. You can later uncomment that section back. This is also great for copying python global environments.
+
+Another way:
+I also like the pip-review method:
+py2
+$ pip install pip-review
+
+$ pip-review --local --interactive
+
+py3
+$ pip3 install pip-review
+
+$ py -3 -m pip_review --local --interactive
+
+You can select 'a' to upgrade all packages; if one upgrade fails, run it again and it continues at the next one.
+","
+You should remove requirements.txt's =={version}. For example: python-dateutil==2.4.2 to python-dateutil for all lines.
+                
+                    – youngminz
+May 15 '16 at 5:28
+","
+I found that this didn't actually upgrade the packages on macOS.
+                
+                    – jkooker
+Mar 8 '17 at 14:42
+","
+@youngminz I would recommand a quick 'Replace all ""=="" > "">="" ' in your editor/ide before running 'pip install...' to fix this
+                
+                    – Amaury Liet
+Mar 16 '17 at 11:12
+
+
+
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jul 24 '19,318
+83,"
+Windows version after consulting excellent documentation for FOR by Rob van der Woude
+for /F ""delims==="" %i in ('pip freeze -l') do pip install -U %i
+
+","
+for /F ""delims= "" %i in ('pip list --outdated') do pip install -U %i        Quicker since it'll only try and update ""outdated"" packages
+                
+                    – Refael Ackermann
+Apr 19 '16 at 19:30
+
+
+
+","
+@RefaelAckermann I suspect this will be slower than the original :) To know which packages are outdated pip has to first check what's the latest version of each package. It does exactly the same as the first step when updating and does not proceed if there's no newer version available. However in your version pip will check versions two times, the first time to establish the list of outdated packages and the second time when updating packages on this list.
+                
+                    – Piotr Dobrogost
+Jan 17 '17 at 9:22
+","
+@RefaelAckermann Spinning up pip is order of magnitude faster than checking version of a package over network so that's number of checks which should be optimized not number of spin ups. Mine makes n checks, yours makes n+m checks.
+                
+                    – Piotr Dobrogost
+Jan 18 '17 at 14:38
+
+
+
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Apr 26 '18,126
+84,"
+Use pipupgrade!
+$ pip install pipupgrade
+$ pipupgrade --latest --yes
+
+pipupgrade helps you upgrade your system, local or packages from a requirements.txt file! It also selectively upgrades packages that don't break change. pipupgrade also ensures to upgrade packages present within multiple Python environments. Compatible with Python2.7+, Python3.4+ and pip9+, pip10+, pip18+, pip19+.
+
+NOTE: I'm the author of the tool.
+","
+This method has much cleaner output than @rbp's answer
+                
+                    – Gaia
+Jan 27 '19 at 16:52
+
+
+
+","
+Nice idea, but it's stuck at Checking... forever when I tried it.
+                
+                    – CGFoX
+Mar 22 '19 at 6:46
+","
+Just installed it and also stuck at checking [0;93mChecking...[0m
+                
+                    – Chris
+May 29 '19 at 17:11
+
+
+
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,May 10 '19,100
+85,"
+You can just print the packages that are outdated
+pip freeze | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 'LATEST:'
+
+","
+Inside a virtualenv, I do it like this: pip freeze --local | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 'LATEST:'
+                
+                    – Jeremy Blanchard
+Mar 28 '12 at 19:46
+","
+Nowadays you can also do that with python -m pip list outdated (though it's not in requirements format).
+                
+                    – Jacktose
+Oct 28 '16 at 18:22
+
+
+
+",null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jun 10 '11,73
+86,"
+This option seems to me more straightforward and readable:
+pip install -U `pip list --outdated | awk 'NR>2 {print $1}'`
+
+
+The explanation is that pip list --outdated outputs a list of all the outdated packages in this format: 
+Package   Version Latest Type 
+--------- ------- ------ -----
+fonttools 3.31.0  3.32.0 wheel
+urllib3   1.24    1.24.1 wheel
+requests  2.20.0  2.20.1 wheel
+
+In the awk command, NR>2 skips the first two records (lines) and {print $1} selects the first word of each line (as suggested by SergioAraujo, I removed tail -n +3 since awk can indeed handle skipping records).
+","
+If one upgrade fails, none of the upgrades happen.
+                
+                    – Boris
+Nov 11 '18 at 14:19
+
+
+
+","
+you can avoid tail awk 'NR>2 {print $1}' cleanses the output for you
+                
+                    – SergioAraujo
+Feb 24 at 19:25
+
+
+
+","
+@SergioAraujo, this makes the solution looks also cleaner, thanks for the tip!
+                
+                    – Marc
+Feb 25 at 17:10
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Feb 25 at,65
+87,"
+The following one-liner might prove of help:
+(pip > 20.0)
+pip list --format freeze --outdated | sed 's/=.*//g' | xargs -n1 pip install -U
+
+Older Versions:
+pip list --format freeze --outdated | sed 's/(.*//g' | xargs -n1 pip install -U
+
+
+xargs -n1 keeps going if an error occurs. 
+If you need more ""fine grained"" control over what is omitted and what raises an error you should not add the -n1 flag and explicitly define the errors to ignore, by ""piping"" the following line for each separate error:
+| sed 's/^<First characters of the error>.*//'
+Here is a working example:
+pip list --format freeze --outdated | sed 's/=.*//g' | sed 's/^<First characters of the first error>.*//' | sed 's/^<First characters of the second error>.*//' | xargs pip install -U
+
+","
+Had to add filters for lines beginning with 'Could' and 'Some' because apparently pip sends warnings to stdout :(
+                
+                    – Chip Camden
+Aug 13 '15 at 23:03
+","
+OK, this is fair: You can add as many | sed 's/^<First characters of the error>.*//' as needed. Thank you!
+                
+                    – raratiru
+Nov 3 '15 at 0:31
+
+
+
+","
+Or: pip list --outdated | cut -d ' ' -f 1 | xargs -n 1 pip install --upgrade
+                
+                    – Jens
+Dec 9 '15 at 21:15
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jan 27 at,64
+88,"
+More Robust Solution
+For pip3 use this:
+pip3 freeze --local |sed -rn 's/^([^=# \t\\][^ \t=]*)=.*/echo; echo Processing \1 ...; pip3 install -U \1/p' |sh
+
+For pip, just remove the 3s as such:
+pip freeze --local |sed -rn 's/^([^=# \t\\][^ \t=]*)=.*/echo; echo Processing \1 ...; pip install -U \1/p' |sh
+
+OSX Oddity
+OSX, as of July 2017, ships with a very old version of sed (a dozen years old).  To get extended regular expressions, use -E instead of -r in the solution above.
+Solving Issues with Popular Solutions
+This solution is well designed and tested1, whereas there are problems with even the most popular solutions.
+
+Portability issues due to changing pip command line features
+Crashing of xargs because common pip or pip3 child process failures
+Crowded logging from the raw xargs output
+Relying on a Python-to-OS bridge while potentially upgrading it3
+
+The above command uses the simplest and most portable pip syntax in combination with sed and sh to overcome these issues completely.  Details of sed operation can be scrutinized with the commented version2.
+
+Details
+[1] Tested and regularly used in a Linux 4.8.16-200.fc24.x86_64 cluster and tested on five other Linux/Unix flavors.  It also runs on Cygwin64 installed on Windows 10.  Testing on iOS is needed.
+[2] To see the anatomy of the command more clearly, this is the exact equivalent of the above pip3 command with comments: 
+# match lines from pip's local package list output
+# that meet the following three criteria and pass the
+# package name to the replacement string in group 1.
+# (a) Do not start with invalid characters
+# (b) Follow the rule of no white space in the package names
+# (c) Immediately follow the package name with an equal sign
+sed=""s/^([^=# \t\\][^ \t=]*)=.*""
+
+# separate the output of package upgrades with a blank line
+sed=""$sed/echo""
+
+# indicate what package is being processed
+sed=""$sed; echo Processing \1 ...""
+
+# perform the upgrade using just the valid package name
+sed=""$sed; pip3 install -U \1""
+
+# output the commands
+sed=""$sed/p""
+
+# stream edit the list as above
+# and pass the commands to a shell
+pip3 freeze --local |sed -rn ""$sed"" |sh
+
+[3] Upgrading a Python or PIP component that is also used in the upgrading of a Python or PIP component can be a potential cause of a deadlock or package database corruption.
+","
+another way to overcome the jurassic BSD sed of OS X is to use gsed (GNU sed) instead. To get it, brew install gnu-sed
+                
+                    – Walter Tross
+Jan 9 '19 at 7:33
+
+
+
+","
+@WalterTross ... Jurassic ... good adjective use. So we now have two ways to group update pip packages with a nice audit trail on the terminal. (1) Use the -E option as in the answer and (2) install gsed to leave the Jurassic period.
+                
+                    – Douglas Daseeco
+Jan 9 '19 at 8:13
+",null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jul 30 '17,49
+89,"
+This seems more concise.
+pip list --outdated | cut -d ' ' -f1 | xargs -n1 pip install -U
+
+Explanation:
+pip list --outdated gets lines like these
+urllib3 (1.7.1) - Latest: 1.15.1 [wheel]
+wheel (0.24.0) - Latest: 0.29.0 [wheel]
+
+In cut -d ' ' -f1, -d ' ' sets ""space"" as the delimiter, -f1 means to get the first column. 
+So the above lines becomes:
+urllib3
+wheel
+
+then pass them to xargs to run the command, pip install -U, with each line as appending arguments
+-n1 limits the number of arguments passed to each command pip install -U to be 1
+","
+I received this warning DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
+                
+                    – Reman
+Nov 26 '16 at 14:01
+","
+@Reman: that is because you are using Pip v9.0.1. This is just a deprecation message meaning that some functionalities will not survive in a future Pip release. Nothing to be concerned about ;)
+                
+                    – AlessioX
+Dec 17 '16 at 20:11
+","
+However, this has to be marked as the final solution. Indeed the accepted answer will run all over your pip packages, which is a waste of time if you have to update only 1 or 2 packages. This solution, as instead, will run just all over the outdated packages
+                
+                    – AlessioX
+Dec 17 '16 at 20:12
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Dec 18 '16,38
+90,"
+I had the same problem with upgrading. Thing is, i never upgrade all packages. I upgrade only what i need, because project may break.
+Because there was no easy way for upgrading package by package, and updating the requirements.txt file, i wrote this pip-upgrader which also updates the versions in your requirements.txt file for the packages chosen (or all packages).
+Installation
+pip install pip-upgrader
+
+Usage
+Activate your virtualenv (important, because it will also install the new versions of upgraded packages in current virtualenv).
+cd into your project directory, then run:
+pip-upgrade
+
+Advanced usage
+If the requirements are placed in a non-standard location, send them as arguments:
+pip-upgrade path/to/requirements.txt
+
+If you already know what package you want to upgrade, simply send them as arguments:
+pip-upgrade -p django -p celery -p dateutil
+
+If you need to upgrade to  pre-release / post-release version, add --prerelease argument to your command.
+Full disclosure: I wrote this package.
+","
+This is what pip should do by default.
+                
+                    – Nostalg.io
+Jun 8 '17 at 15:51
+","
+heads up with your tool some character escapes don't seem to work correctly on my windows machine but other than that it's fine
+                
+                    – Luke
+Jul 12 '17 at 12:43
+
+
+
+","
+haven't really tested it on windows, but i'll install a virtual machine. Thanks
+                
+                    – Simion Agavriloaei
+Jul 12 '17 at 14:01
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Apr 26 '17,33
+91,"
+From https://github.com/cakebread/yolk :
+$ pip install -U `yolk -U | awk '{print $1}' | uniq`
+
+however you need to get yolk first:
+$ sudo pip install -U yolk
+
+","
+Last commit 7 years ago
+                
+                    – Boris
+Jul 29 '19 at 6:33
+","
+in year 2013 AD
+                
+                    – dotbit
+Dec 10 '19 at 19:09
+",null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jan 3 '13,27
+92,"
+One-liner version of @Ramana's answer.
+python -c 'import pip, subprocess; [subprocess.call(""pip install -U "" + d.project_name, shell=1) for d in pip.get_installed_distributions()]'
+
+`
+","
+subprocess.call(""sudo pip install... in case you need permissions
+                
+                    – Maximiliano Rios
+May 27 '14 at 19:50
+
+
+
+","
+@MaximilianoRios Please do not sudo pip install, use a virtual env, instead.
+                
+                    – Bengt
+Feb 20 '16 at 15:28
+
+
+
+",null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Apr 26 '18,26
+93,"
+when using a virtualenv and if you just want to upgrade packages added to your virtualenv, you may want to do:
+pip install `pip freeze -l | cut --fields=1 -d = -` --upgrade
+
+",null,null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Sep 13 '11,20
+94,"
+Windows Powershell solution
+pip freeze | %{$_.split('==')[0]} | %{pip install --upgrade $_}
+
+","
+pip list --outdated | %{$_.split('==')[0]} | %{pip install --upgrade $_}?
+                
+                    – Foad
+May 22 '19 at 8:38
+","
+Perhaps pip list --outdated --format freeze | %{$_.split('==')[0]} | %{pip install --upgrade $_} would be more appropriate.
+                
+                    – brainplot
+Jan 3 at 5:06
+",null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Sep 16 '16,17
+95,"
+use awk update packges:
+
+pip install -U $(pip freeze | awk -F'[=]' '{print $1}')
+
+windows powershell update
+
+foreach($p in $(pip freeze)){ pip install -U $p.Split(""="")[0]}
+
+","
+pip freeze | awk -F'[=]' '{print $1}' | xargs pip install -U
+                
+                    – JohnDHH
+Mar 13 '18 at 3:16
+
+
+
+","
+And for python 3...  pip3 install -U $(pip3 freeze | awk -F'[=]' '{print $1}')
+                
+                    – Jimmy M.G. Lim
+Apr 3 '19 at 7:48
+",null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Dec 29 '18,15
+96,"
+The simplest and fastest solution that I found in the pip issue discussion is:
+pip install pipdate
+pipdate
+
+Source: https://github.com/pypa/pip/issues/3819
+","
+Whereas other solutions stalled upon encountering the slightest anomaly, this solution warned and then skipped the problem to continue with the other packages. Great!
+                
+                    – Serge Stroobandt
+May 10 '18 at 20:14
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Mar 3 at,15
+97,"
+You can try this :
+for i in ` pip list|awk -F ' ' '{print $1}'`;do pip install --upgrade $i;done
+
+","
+this is the cleanest, highest readable way to update pip packages in the most amount of brevity. great.
+                
+                    – Mark Shust
+Oct 28 '13 at 12:41
+
+
+
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jul 17 '13,12
+98,"
+The rather amazing yolk makes this easy.
+pip install yolk3k # don't install `yolk`, see https://github.com/cakebread/yolk/issues/35
+yolk --upgrade
+
+For more info on yolk: https://pypi.python.org/pypi/yolk/0.4.3
+It can do lots of things you'll probably find useful.
+","
+Your answer has been changed from yolk to yolk3k, your original answer definitely had issues with python3.
+                
+                    – AXO
+Dec 19 '16 at 19:41
+
+
+
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jul 26 '16,12
+99,"
+@Ramana's answer worked the best for me, of those here, but I had to add a few catches:
+import pip
+for dist in pip.get_installed_distributions():
+    if 'site-packages' in dist.location:
+        try:
+            pip.call_subprocess(['pip', 'install', '-U', dist.key])
+        except Exception, exc:
+            print exc
+
+The site-packages check excludes my development packages, because they are not located in the system site-packages directory. The try-except simply skips packages that have been removed from PyPI.
+@endolith: I was hoping for an easy pip.install(dist.key, upgrade=True), too, but it doesn't look like pip was meant to be used by anything but the command line (the docs don't mention the internal API, and the pip developers didn't use docstrings).
+","
+On Ubuntu (and other Debian derivatives), pip apparently puts packages in /usr/local/lib/python2.7/dist-packages or similar. You could use '/usr/local/lib/' instead of 'site-packages' in the if statement in this case.
+                
+                    – drevicko
+Jan 13 '13 at 4:31
+
+
+
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Apr 26 '18,11
+100,"
+Sent through a pull-request to the pip folk; in the meantime use this pip library solution I wrote:
+from pip import get_installed_distributions
+from pip.commands import install
+
+install_cmd = install.InstallCommand()
+
+options, args = install_cmd.parse_args([package.project_name
+                                        for package in
+                                        get_installed_distributions()])
+
+options.upgrade = True
+install_cmd.run(options, args)  # Chuck this in a try/except and print as wanted
+
+","
+Version with error handling (as per comment): gist.github.com/SamuelMarks/7885f2e8e5f0562b1063
+                
+                    – Samuel Marks
+Apr 27 '15 at 5:39
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jan 26 '14,9
+101,"
+This seemed to work for me...
+pip install -U $(pip list --outdated|awk '{printf $1"" ""}')
+
+I used printf with a space afterwards to properly separate the package names.
+",null,null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Aug 5 '15,9
+102,"
+The pip_upgrade_outdated does the job. According to its docs:
+usage: pip_upgrade_outdated [-h] [-3 | -2 | --pip_cmd PIP_CMD]
+                            [--serial | --parallel] [--dry_run] [--verbose]
+                            [--version]
+
+Upgrade outdated python packages with pip.
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -3                 use pip3
+  -2                 use pip2
+  --pip_cmd PIP_CMD  use PIP_CMD (default pip)
+  --serial, -s       upgrade in serial (default)
+  --parallel, -p     upgrade in parallel
+  --dry_run, -n      get list, but don't upgrade
+  --verbose, -v      may be specified multiple times
+  --version          show program's version number and exit
+
+Step 1:
+pip install pip-upgrade-outdated
+
+Step 2:
+pip_upgrade_outdated
+
+","
+Step 1: pip install pip-upgrade-outdated  Step 2: pip-upgrade-outdated  ...done
+                
+                    – shao.lo
+Oct 23 '18 at 22:55
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Oct 24 '18,9
+103,"
+This is a PowerShell solution for Python 3:
+pip3 list --outdated --format=legacy | ForEach { pip3 install -U $_.split("" "")[0] }
+
+And for Python 2:
+pip2 list --outdated --format=legacy | ForEach { pip2 install -U $_.split("" "")[0] }
+
+This upgrades the packages one by one. So a
+pip3 check
+pip2 check
+
+afterwards should make sure no dependencies are broken.
+",null,null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jul 4 '17,7
+104,"
+How about:
+pip install -r <(pip freeze) --upgrade
+
+",null,null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Sep 12 '17,7
+105,"
+The shortest and easiest on Windows.
+pip freeze > requirements.txt && pip install --upgrade -r requirements.txt && rm requirements.txt
+
+","
+@Enkouyami on windows 7 this command does not work without the -r. -r must preclude the path to the requirements file.
+                
+                    – Chockomonkey
+Jul 16 '18 at 21:45
+",null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Apr 23 '18,7
+106,"
+My script:
+pip list --outdated --format=legacy | cut -d ' ' -f1 | xargs -n1 pip install --upgrade
+
+",null,null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jan 10 '17,6
+107,"
+Isn't this more effective?
+pip3 list -o | grep -v -i warning | cut -f1 -d' ' | tr "" "" ""\n"" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3 install -U 
+
+
+pip list -o lists outdated packages;
+grep -v -i warning inverted match on warning to avoid errors when updating
+cut -f1 -d1' ' returns the first word - the name of the outdated package;
+tr ""\n|\r"" "" "" converts the multiline result from cut into a single-line, space-separated list;
+awk '{if(NR>=3)print}' skips header lines 
+cut -d' ' -f1 fetches the first column
+xargs -n1 pip install -U takes 1 argument from the pipe left of it, and passes it to the command to upgrade the list of packages.
+
+","
+Here's my output: kerberos iwlib PyYAML Could pygpgme Could Could Could ... Note all the ""Could""s. Those stem from output of pip list -o of ""Could not find any downloads that satisfy the requirement <package>""
+                
+                    – DrStrangepork
+Nov 14 '14 at 21:03
+","
+Can you paste the output of pip list -o ?
+                
+                    – Alex V
+Nov 15 '14 at 9:30
+","
+Comments don't format this well, but here's a snippet (line endings are marked with ';'): # pip list -o; urwid (Current: 1.1.1 Latest: 1.3.0); Could not find any downloads that satisfy the requirement python-default-encoding; pycups (Current: 1.9.63 Latest: 1.9.68); Could not find any downloads that satisfy the requirement policycoreutils-default-encoding; Could not find any downloads that satisfy the requirement sepolicy; 
+                
+                    – DrStrangepork
+Nov 17 '14 at 22:30
+
+
+
+",https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,Jun 25 '17,6
+108,"
+Here is my variation on rbp's answer, which bypasses ""editable"" and development distributions. It shares two flaws of the original: it re-downloads and reinstalls unnecessarily; and an error on one package will prevent the upgrade of every package after that.
+pip freeze |sed -ne 's/==.*//p' |xargs pip install -U --
+
+Related bug reports, a bit disjointed after the migration from bitbucket:
+
+https://github.com/pypa/pip/issues/49
+https://github.com/pypa/pip/issues/59
+
+",null,null,null,https://stackoverflow.com//questions/2720014/how-to-upgrade-all-python-packages-with-pip,How to upgrade all Python packages with pip?,May 26 '11,5

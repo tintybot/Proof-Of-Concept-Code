@@ -83,7 +83,7 @@ def getRelatedLinks():
         for i in reversed(Z) :
             link.append(i)
             k=k+1
-            if k == 1:
+            if k == 5:
                break
         scrapeAndCreateFiles()
     else:
@@ -101,5 +101,3 @@ def scrapeAndCreateFiles():
         
         
 startScaper()
-
-#df1 = pd.read_csv("Question&Answers.csv")
